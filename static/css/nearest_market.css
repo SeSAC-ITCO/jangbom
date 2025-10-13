@@ -1,0 +1,533 @@
+@font-face {
+  font-family: "HSSanTokki20-Regular";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2405@1.0/HSSanTokki20-Regular.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --app-max-w: 393px;
+  --status-h: 44px;
+  --apptop-h: 44px;
+  --cta-h: 88px;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  min-height: 100dvh;
+  background: #efefef;
+}
+
+.box {
+  position: static !important;
+  width: min(100vw, var(--app-max-w));
+  min-height: 100dvh;
+  margin: 0 auto;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* overflow: hidden; */
+  overflow: visible;
+    border : 1px solid #d9d9d9
+
+}
+
+.status-bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: var(--status-h);
+  padding: 0 25px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.status1 {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.status2 img {
+  width: 18px;
+  height: 13px;
+}
+
+.app-top-bar {
+  position: sticky;
+  top: var(--status-h);
+  z-index: 49;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: var(--apptop-h);
+  padding: 0 15px;
+}
+
+.top-back img {
+  width: 24px;
+  height: auto;
+}
+
+.top-point {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.point img {
+  width: 22px;
+  height: 20px;
+}
+
+.point {
+  margin-top: 4px;
+}
+
+.mypoint {
+  font-size: 14px;
+  font-weight: 600;
+  width: 61px;
+  height: 27px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f5f5;
+  border: 1px solid #d9d9d9;
+  border-radius: 20px;
+}
+
+.app-body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 12px 16px calc(var(--cta-h) + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+}
+
+.app-body img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.mart-title {
+  gap: 4px;
+  text-align: center;
+}
+
+.mart-title2 {
+  font-size: 23px;
+  font-weight: 600;
+  margin: 5px 0 2px;
+  display: flex;
+  justify-content: center;
+}
+
+.mart-title3 {
+  font-size: 16px;
+  font-weight: 400;
+  margin: 10px 0 5px;
+  color: #555;
+}
+
+.mart-dis {
+  font-size: 15px;
+  font-weight: 500;
+  color: #d9d9d9;
+}
+
+.mart-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.mart-pic {
+  width: 286px;
+  height: auto;
+  border-radius: 20px;
+  border: 2px solid #d9d9d9;
+  margin-top: 12px;
+}
+
+.circle-wrap {
+  position: relative;
+  margin: 10px auto 28px;
+}
+
+.middle-line {
+  width: 291px;
+  height: 12px;
+  background: #c9b899;
+  border-radius: 20px;
+  margin: 0 auto;
+}
+
+.circle-time {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  box-shadow: 0 -5px 2px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.mart-due {
+  position: relative;
+  z-index: 3;
+  margin-top: -7px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+  color: #c9b899;
+}
+
+.runner-time {
+  font-size: 32px;
+  font-family: "HSSanTokki20-Regular", sans-serif;
+  color: #545454;
+}
+
+.app-bottom-bar {
+  bottom: 0;
+  overflow-y: auto;
+  box-sizing: border-box;
+  margin-top: 15px;
+}
+
+.bar-content {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.bar-list {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mart-dropdown {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.bar-title {
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 15px 0 5px;
+  padding: 0 40px;
+  width: 100%;
+}
+
+.more-icon {
+  width: 24px;
+  height: auto;
+}
+
+.mart-info2 {
+  width: 100%;
+  max-width: 306px;
+  gap: 13px;
+  background: #f5f5f5;
+  border-radius: 20px;
+  padding: 15px 20px;
+  margin: 0 auto 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.mi-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.mi-item img {
+  width: 16px;
+  height: 16px;
+}
+
+.mi-name {
+  color: #545454;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.mat-block-set {
+  width: 100%;
+  max-width: 306px;
+  background: #f5f5f5;
+  border-radius: 20px;
+  padding: 15px 20px;
+  margin: 0 auto 12px;
+  display: flex;
+  justify-content: center;
+}
+
+.item-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 15px;
+  column-gap: 15px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 15px;
+  gap: 5px;
+}
+
+.item-pic {
+  background: #d9d9d9;
+  width: 130px;
+  height: 106px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.start {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  z-index: 55;
+  width: min(100vw, var(--app-max-w));
+  background: #fff;
+  border-top: 1px solid #eee;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+.start-point {
+  font-size: 15px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #d9d9d9;
+  background: #f5f5f5;
+  border-radius: 20px;
+  padding: 6px 12px;
+}
+
+.start-point img {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.startBtn {
+  font-size: 20px;
+  font-weight: 600;
+  width: 271px;
+  height: 53px;
+  background: #beda78;
+  color: #fff;
+  border-radius: 15px;
+  border: 0;
+  cursor: pointer;
+}
+
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  padding: 16px;
+  box-sizing: border-box;
+  display: none;
+}
+
+.modal.open {
+  display: grid;
+  place-items: center;
+}
+
+.modal-content {
+  width: 320px;
+  max-width: calc(100vw - 32px);
+  max-height: calc(100dvh - 32px);
+  background: #fff;
+  border-radius: 24px;
+  padding: 22px 20px 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.closed {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 8px;
+  display: block;
+}
+
+.modal-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #e35454;
+}
+
+.modal-detail {
+  font-size: 15px;
+  color: #d9d9d9;
+  border-radius: 8px;
+  padding: 10px 8px;
+  margin: 0 6px 10px;
+}
+
+.modal-footer {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -20px;
+  margin-right: -20px;
+}
+
+.modal-exit {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: #d9d9d9;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 56px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.modal-exit:hover,
+.modal-exit:active,
+.modal-exit:focus {
+  color: #fff;
+}
+
+@supports (height: 100svh) {
+  .container {
+    min-height: 100svh;
+  }
+}
+
+.mart-dropdown .mart-info2,
+.mart-dropdown .mat-block-set {
+  max-height: 0;
+  overflow: hidden;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  opacity: 0;
+  transition: max-height 240ms ease, padding 240ms ease, margin 240ms ease,
+    opacity 160ms ease;
+}
+
+.mart-dropdown.open .mart-info2,
+.mart-dropdown.open .mat-block-set {
+  max-height: 1000px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  opacity: 1;
+}
+
+.mart-dropdown .more-icon {
+  transition: transform 200ms ease, filter 150ms ease;
+}
+
+.mart-dropdown.open .more-icon {
+  transform: rotate(180deg);
+  filter: brightness(0) saturate(100%);
+}
+
+:root {
+  --hero-w: 306px;
+  --hero-r: 20px;
+  --hero-b: 2px;
+}
+
+.mart-pic,
+.mart-loc {
+  width: var(--hero-w);
+  max-width: var(--hero-w);
+  aspect-ratio: 16 / 11;
+  border-radius: var(--hero-r);
+  border: var(--hero-b) solid #d9d9d9;
+  object-fit: cover;
+  display: block;
+  margin: 12px auto 0;
+}
+
+.middle-line {
+  width: var(--hero-w);
+}
+
+.item-pic {
+  border-radius: 20px;
+}
+
+.mypoint {
+  min-width: 61px;
+}
+
+/* 하단 CTA도 martRoute처럼 sticky (이미 padding-bottom 줬으니 가려지지 않음) */
+.start {
+  position: sticky; /* fixed → sticky */
+  bottom: 0;
+  left: auto;
+  transform: none;
+  z-index: 40;
+  width: 100%;
+  border-top: 1px solid #eee;
+}

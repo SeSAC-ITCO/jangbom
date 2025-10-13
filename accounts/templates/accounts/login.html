@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <script src="{% static 'js/login.js' %}" defer></script>
+    <title>로그인</title>
+</head>
+<body>
+    <div id="Container">
+        <img id="statusBar" src="{% static 'img/iPhone Status bar.png' %}"/>
+        
+        <div class="titleBox">
+            <div class="title1">
+                <img id="mainTitle" src="{% static 'img/title.png' %}"/>
+            </div>
+            <div class="title2">
+                <p class="ment1">로그인하고 장 보러 가요!</p>
+                <p class="ment2">지금 시작해보세요!</p>
+            </div>
+        </div>
+
+        <form id="loginInput" method="post">
+            {% csrf_token %}
+
+
+            <div class="idBox">
+                <p>아이디</p>
+                <div class="idInput">
+                    <input type="text" id="id" name="username" placeholder="2자 이상 입력해주세요">
+                </div>
+            </div>
+
+            <div class="passwordBox">
+                <p>비밀번호</p>
+                <div class="passwordInput">
+                    <input type="password" id="password" name="password" placeholder="8자 이상 입력해주세요">
+                </div>
+            </div>
+
+            <div class="exBtn">
+                <a href="#">아이디 찾기</a>
+                <a href="#">비밀번호 찾기</a>
+                <a href="{% url 'accounts:signup' %}">회원가입</a>
+            </div>
+
+            <button type="submit"><p>로그인 하기</p></button>
+        </form>
+
+    </div>
+</body>
+</html>

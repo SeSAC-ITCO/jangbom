@@ -1,0 +1,138 @@
+{% load static humanize %}
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>장봄 포인트</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/barcode.css' %}" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="box">
+        <!-- 상단 상태바 -->
+        <div class="status-bar">
+          <p>19:20</p>
+          <div class="status1">
+            <img class="status2" src="{% static 'img/reception.svg' %}" alt="reception" />
+            <img class="status2" src="{% static 'img/wifi.svg' %}" alt="wifi" />
+            <img class="status2" src="{% static 'img/battery.svg' %}" alt="battery" />
+          </div>
+        </div>
+
+        <!-- 앱 자체 상단바 -->
+        <a href="javascript:window.history.back()">
+          <div class="app-top-bar">
+            <img class="top-back" src="{% static 'img/chevron-x(gray).svg' %}" alt="뒤로 가기" />
+          </div>
+        </a>
+
+
+        <div class="title-set">
+          <h2 class="app-title">장봄 포인트</h2>
+          <p class="app-sub">적립 및 사용 통합 바코드</p>
+        </div>
+
+        <!-- 본문 폼 -->
+        <form method="post" class="request-pw" novalidate>
+          {% csrf_token %}
+
+          <input type="hidden" name="request_id" value="{{ request_id }}" />
+          <input type="hidden" name="code" id="code" />
+
+          <h4 class="request-title">
+            직원분께 <span class="request-accent">인증번호 입력</span>을<br />요청해주세요
+          </h4>
+
+          <div class="pw-nums">
+            <div class="pw-num"></div>
+            <div class="pw-num"></div>
+            <div class="pw-num"></div>
+            <div class="pw-num"></div>
+          </div>
+
+          <div class="usepointBox" data-left-point="{{ total_point|default:0 }}">
+            <p class="usepoint-title">사용할 포인트</p>
+            <div class="used-point">
+              <p class="usepoint-help">100 P 단위로 사용 가능</p>
+
+              <div class="point-input-set">
+                <input
+                  id="use_point"
+                  name="use_point"
+                  class="point-input"
+                  type="text"
+                  placeholder="000"
+                  inputmode="numeric"
+                  pattern="[0-9]*"
+                  aria-describedby="usePointErrEmpty usePointErrStep"
+                  autocomplete="one-time-code"
+                  required
+                />
+                <span class="unit">P</span>
+              </div>
+
+              <div class="left-point-set">
+                <p class="text1">남은 포인트</p>
+                <p class="text2"><span id="leftPoint">{{ total_point|intcomma }}</span> P</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="error-ment-set">
+            <p class="pin-error" id="usePointErrEmpty" hidden>
+              <img src="{% static 'img/triangle-alert.svg' %}" alt="" />
+              사용할 포인트 액수를 입력해주세요
+            </p>
+            <p class="pin-error" id="usePointErrStep" hidden>
+              <img src="{% static 'img/triangle-alert.svg' %}" alt="" />
+              포인트는 100 P 단위로만 사용 가능합니다
+            </p>
+          </div>
+
+          <button class="completenumBtn" type="submit" disabled>다음</button>
+
+          <div class="dialpad hidden" id="dialpad">
+            <img src="{% static 'img/Numeric (iPhone).svg' %}" alt="dialpad" />
+          </div>
+        </form>
+
+        <div class="confirmSuccess-modal {% if success_info %}open{% endif %}"
+             id="confirmSuccess"
+             aria-hidden="{% if success_info %}false{% else %}true{% endif %}">
+          <div class="confirm-card">
+            <img class="confirm-icon" src="{% static 'img/circle-check-green.svg' %}" alt="성공" />
+            <p class="confirm-title">정상 처리 완료</p>
+            {% if success_info %}
+            <div class="total-point-set">
+              <p>사용한 포인트: {{ success_info.used|intcomma }}P</p>
+              <p>남은 포인트: {{ success_info.remaining|intcomma }}P</p>
+            </div>
+            {% endif %}
+              <button
+              class="confirm-okBtn"
+              id="confirmOkBtn"
+              type="button"
+              data-next="/"
+            >
+              홈으로
+            </button>
+          </div>
+        </div>
+
+        <!-- Django messages -->
+        {% if messages %}
+          <ul class="django-messages">
+            {% for message in messages %}
+              <li {% if message.tags %}class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    </div>
+
+    <script src="{% static 'js/barcode.js' %}" defer></script>
+  </body>
+</html>

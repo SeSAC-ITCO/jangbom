@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/point_ranking.css' %}" />
+    <script src="{% static 'js/point_ranking.js' %}" defer></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="Container">
+        <img id="statusBar" src="{% static 'img/iPhone Status bar.png' %}"/>
+        <div id="pointBar">
+            <a href="{% url 'point:point_home' %}" class="homeBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path d="M20 24L12 16L20 8" stroke="#D9D9D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+            <div class="userBar">
+                <a href="{% url 'food:cart_view' %}" class="basket-container">
+                        {% if cart_items_count == 0 %}
+                            <img src="{% static 'img/basket.svg' %}" class="basket" alt="basket">
+                            <span class="basket-count">{{ cart_items_count }}</span>
+                        {% else %}
+                            <img src="{% static 'img/basket.svg' %}" class="basket" alt="basket">
+                            <span class="basket-count">{{ cart_items_count }}</span>
+                        {% endif %}
+                </a>
+                <a href="{% url 'point:barcode' %}"><img src="{% static 'img/lucide.svg' %}" class="lucide" alt="lucide"></a>
+                <a href="{% url 'point:point_home' %}"><div class="pointNum"><p>{{ total_point }}P</p></div></a>
+            </div>
+        </div>
+
+        <div id="mainBoard">
+            <div class="board1">
+                <div class="userPoint">{{ district|default:"" }} 포인트 랭킹</div>
+                <div class="userResult">
+                    <div class="totalUser">
+                        <p class="title">총 장보미 수</p>
+                        <p class="totalUserNum">{{ total_stats.shopper_count }}명</p>
+                    </div>
+                    <div class="line"></div>
+                    <div class="totalPoint">
+                        <p class="title">총 장봄 포인트</p>
+                        <p class="totalPointNum">{{ total_stats.total_points }} P</p>
+                    </div>
+                </div>
+
+                <div class="rank30">이번주 TOP 30 랭킹</div>
+
+                <div class="top3Container">
+                    {% for row in weekly_top30 %}
+                        {% if forloop.counter == 2 %}
+                            <div class="rank-card second">
+                                <img src="{% static 'img/silver.svg' %}" class="medal">
+                                <div class="rank-title">TOP 2</div>
+                                <div class="username">{{ row.user__nickname }}</div>
+                            </div>
+                        {% elif forloop.counter == 1 %}
+                            <div class="rank-card first">
+                                <img src="{% static 'img/gold.svg' %}" class="medal">
+                                <div class="rank-title">TOP 1</div>
+                                <div class="username">{{ row.user__nickname }}</div>
+                            </div>
+                        {% elif forloop.counter == 3 %}
+                            <div class="rank-card third">
+                                <img src="{% static 'img/bronze.svg' %}" class="medal">
+                                <div class="rank-title">TOP 3</div>
+                                <div class="username">{{ row.user__nickname }}</div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+
+            <div class="board2">
+                {% for row in weekly_top30 %}
+                    {% if forloop.counter > 3 %}
+                        <div class="rankingItem">
+                            <div class="rank">{{ forloop.counter }}</div>
+                            <div class="info">
+                                <span class="location">{{ district|default:"" }}</span>
+                                <span class="username">{{ row.user__nickname }}</span>
+                            </div>
+                            <div class="points">{{ row.points }} P</div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+
+
+        <!-- 하단 탭 -->
+        <div id="bottomTab">
+            <a href="{% url 'food:main' %}" class="homeTab">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="home">
+                    <path d="M15 21V13C15 12.7348 14.8946 12.4805 14.7071 12.2929C14.5196 12.1054 14.2652 12 14 12H10C9.73478 12 9.48043 12.1054 9.29289 12.2929C9.10536 12.4805 9 12.7348 9 13V21M3 10C2.99993 9.7091 3.06333 9.42165 3.18579 9.15775C3.30824 8.89384 3.4868 8.65983 3.709 8.47203L10.709 2.47303C11.07 2.16794 11.5274 2.00055 12 2.00055C12.4726 2.00055 12.93 2.16794 13.291 2.47303L20.291 8.47203C20.5132 8.65983 20.6918 8.89384 20.8142 9.15775C20.9367 9.42165 21.0001 9.7091 21 10V19C21 19.5305 20.7893 20.0392 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0392 3 19.5305 3 19V10Z" stroke="#A5A5A5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <p>홈</p>
+            </a>
+            <a href="{% url 'accounts:activity_log' %}" class="myTab">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="my">
+                    <path d="M15.9999 17H19.9999M3.99991 13H7.99991M3.99991 16V13.62C3.99991 11.5 2.96991 10.5 2.99991 8C3.02991 5.28 4.48991 2 7.49991 2C9.36991 2 9.99991 3.8 9.99991 5.5C9.99991 8.61 7.99991 11.16 7.99991 14.18V16C7.99991 16.5304 7.7892 17.0391 7.41412 17.4142C7.03905 17.7893 6.53034 18 5.99991 18C5.46948 18 4.96077 17.7893 4.5857 17.4142C4.21062 17.0391 3.99991 16.5304 3.99991 16ZM19.9999 20V17.62C19.9999 15.5 21.0299 14.5 20.9999 12C20.9699 9.28 19.5099 6 16.4999 6C14.6299 6 13.9999 7.8 13.9999 9.5C13.9999 12.61 15.9999 15.16 15.9999 18.18V20C15.9999 20.5304 16.2106 21.0391 16.5857 21.4142C16.9608 21.7893 17.4695 22 17.9999 22C18.5303 22 19.0391 21.7893 19.4141 21.4142C19.7892 21.0391 19.9999 20.5304 19.9999 20Z" stroke="#A5A5A5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <p>내 활동</p>
+            </a>
+            <a href="{% url 'point:point_home' %}" class="pointTab">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="point">
+                    <path d="M9 17V7H13C13.7956 7 14.5587 7.31607 15.1213 7.87868C15.6839 8.44129 16 9.20435 16 10C16 10.7956 15.6839 11.5587 15.1213 12.1213C14.5587 12.6839 13.7956 13 13 13H9M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <p>포인트</p>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

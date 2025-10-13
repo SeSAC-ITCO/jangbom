@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/leftover_extra_ingredient_search.css' %}" />
+    <title>leftover_extra_ingredient_search</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="box">
+        {% comment %} 상단바 {% endcomment %}
+        <div class="status-bar">
+          <p>19:20</p>
+          <div class="status1">
+            <img class="status2" src="{% static 'img/reception.svg' %}" alt="reception" />
+            <img class="status2" src="{% static 'img/wifi.svg' %}" alt="wifi" />
+            <img class="status2" src="{% static 'img/battery.svg' %}" alt="battery" />
+          </div>
+        </div>
+
+        {% comment %} 앱 자체 상단바 {% endcomment %}
+        <div class="app-top-bar">
+          <a href="{% url 'food:select_recent_ingredients' %}" aria-label="뒤로가기">
+            <img class="top-back" src="{% static 'img/chevron-x.svg' %}" alt="close" />
+          </a>
+        </div>
+
+        <div class="app-body">
+          <h3 class="add-mat-title">재료 직접 담기</h3>
+          <p>따로 구매할 재료가 있다면 직접 추가해보세요!</p>
+
+          <form class="ah_search" method="get" action="{% url 'food:leftover_extra_ingredient_search' %}">
+            <div class="input-row">
+              <textarea class="input-rec" name="search" placeholder=" ">{{ request.GET.search|default_if_none:'' }}</textarea>
+              <button class="input-rec-search" type="submit" name="action" value="search" aria-label="검색">
+                <img src="{% static 'img/search.svg' %}" alt="검색" />
+              </button>
+            </div>
+          </form>
+
+          {% if category_ingredients %}
+            <section class="search-result" aria-live="polite">
+              <ul class="result-list">
+                {% for ing in category_ingredients %}
+                  <li class="result-item">
+                    <form method="post" action="{% url 'food:leftover_add_extra_ingredient' %}">
+                      {% csrf_token %}
+                      <input type="hidden" name="search" value="{{ request.GET.search }}">
+                      <label class="result-row">
+                        <input
+                          type="checkbox"
+                          name="ingredient"
+                          value="{{ ing.name }}"
+                          onchange="this.form.submit()"
+                        />
+                        <span class="result-name">{{ ing.name }}</span>
+                      </label>
+                    </form>
+                  </li>
+                {% endfor %}
+              </ul>
+            </section>
+          {% endif %}
+
+          <div
+            class="toast {% if request.GET.search and not category_ingredients %}show{% endif %}"
+            id="noResultToast"
+            aria-live="polite"
+            aria-hidden="{% if request.GET.search and not category_ingredients %}false{% else %}true{% endif %}"
+          >
+            해당되는 검색어가 없습니다
+          </div>
+
+          <section class="recent-search">
+            <div class="recent-search-head">
+              <h4>최근 검색어</h4>
+              {% if recent_searches %}
+                <a class="recent-clear" href="{% url 'food:clear_extra_recent_searches' %}">전체삭제</a>
+              {% endif %}
+            </div>
+
+            <div class="recent-chips">
+              {% if recent_searches %}
+                {% for word in recent_searches %}
+                  <span class="chip-wrap">
+                    <a class="chip" href="{% url 'food:leftover_extra_ingredient_search' %}?search={{ word|urlencode }}">
+                      {{ word }}
+                    </a>
+                    <a class="chip-x" href="{% url 'food:delete_extra_recent_search' word %}" aria-label="{{ word }} 삭제">×</a>
+                  </span>
+                {% endfor %}
+              {% else %}
+                <span class="chip-empty">최근 검색어가 없습니다.</span>
+              {% endif %}
+            </div>
+          </section>
+
+          <section class="selected-section">
+            <h4 class="selected-title">추가한 재료</h4>
+            <ul class="selected-list">
+            {% if selected_ingredients %}
+              <div class="selected-chips">
+                {% for ing in selected_ingredients %}
+                  <span class="chip-wrap">
+                    <span class="chip-label">{{ ing.name }}</span>
+                    <a class="chip-x" href="{% url 'food:leftover_remove_extra_ingredient' ing.name %}" aria-label="{{ ing.name }} 제거">×</a>
+                  </span>
+                {% endfor %}
+              </div>
+            {% else %}
+              <p>아직 추가한 재료가 없습니다.</p>
+            {% endif %}
+            </ul>
+          </section>
+        </div>
+
+        <div class="add-mat start">
+          <div class="add-mat-item">
+            <a class="add-item-done" href="{% url 'food:select_recent_ingredients' %}">완료</a>
+          </div>
+        </div>
+
+        <div class="dialpad hidden" id="dialpad">
+          <img src="{% static 'img/iOS-Keypad.svg' %}" alt="" />
+        </div>
+      </div>
+    </div>
+
+    <script src="{% static 'js/recipe_ingredients_search.js' %}" defer></script>
+    <script>
+      (function(){
+        var toast = document.getElementById('noResultToast');
+        if (toast && toast.classList.contains('show')) {
+          setTimeout(function(){
+            toast.classList.remove('show');
+            toast.setAttribute('aria-hidden','true');
+          }, 1800);
+        }
+      })();
+    </script>
+  </body>
+</html>

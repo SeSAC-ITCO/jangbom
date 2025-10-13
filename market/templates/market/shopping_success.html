@@ -1,0 +1,224 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/shopping_success.css' %}" />
+    <title>shopping_success(도착)</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box">
+        {% comment %} 상단바 {% endcomment %}
+        <div class="status-bar">
+          <p>19:20</p>
+          <div class="status1">
+            <img class="status2" src="{% static 'img/reception.svg' %}" alt="reception" />
+            <img class="status2" src="{% static 'img/wifi.svg' %}" alt="wifi" />
+            <img class="status2" src="{% static 'img/battery.svg' %}" alt="battery" />
+          </div>
+        </div>
+
+        {% comment %} 앱 자체 상단바 {% endcomment %}
+        <div class="app-top-bar">
+          <a class="top-back" href="javascript:history.back()" aria-label="뒤로가기">
+            <img src="{% static 'img/chevron-left.svg' %}" alt="back" />
+          </a>
+          <div class="top-point">
+            <a
+              href="{% url 'food:cart_view' %}"
+              class="cart-link"
+              aria-label="장바구니"
+              style="margin-left: 8px"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  <path d="M15 11L14 20M19 11L15 4M2 11H22M3.5 11L5.1 18.4C5.1935 18.8586 5.44485 19.2698 5.81028 19.5621C6.17572 19.8545 6.63211 20.0094 7.1 20H16.9C17.3679 20.0094 17.8243 19.8545 18.1897 19.5621C18.5552 19.2698 18.8065 18.8586 18.9 18.4L20.6 11M4.5 15.5H19.5M5 11L9 4M9 11L10 20" stroke="#545454" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>{% if cart_items_count %}<span class="cart-badge"
+                >{{ cart_items_count }}</span
+              >{% endif %}
+            </a>
+            <img class="point" src="{% static 'img/lucide.svg' %}" alt="point" />
+            <p class="mypoint">{{ total_point|default:"0" }} P</p>
+          </div>
+        </div>
+
+        <main class="app-body">
+          <div class="point-saving">
+            <img src="{% static 'img/박.svg' %}" alt="" />
+            <span class="start-point">
+              <img src="{% static 'img/coins.svg' %}" alt="" />
+              {% if message %}
+                {{ message }}
+              {% else %}
+                {{ point_earned|default:"0" }} 포인트 적립!
+              {% endif %}
+            </span>
+
+            <div class="total-point">
+              <p>누적 포인트</p>
+              <p>{{ total_point|default:"0" }}P</p>
+            </div>
+            <div class="total-runtime">
+              <p>누적 걸음 시간</p>
+              <p>
+                {% if total_runtime %}{{ total_runtime }}
+                {% elif total_steps %}{{ total_steps }}
+                {% else %}0{% endif %}
+              </p>
+            </div>
+
+            <div class="goto-myactivity">
+              <a class="saving-history-set" href="{% url 'point:point_history' %}">
+                <img class="set-img" src="{% static 'img/돈주머니.svg' %}" alt="적립내역" />
+                <div class="saving-history">
+                  적립내역
+                  <img src="{% static 'img/chevron-right(gray).svg' %}" alt="" />
+                </div>
+              </a>
+              <a class="check-ranking-set" href="{% url 'point:point_ranking' %}">
+                <img class="set-img" src="{% static 'img/훈장.svg' %}" alt="랭킹확인" />
+                <div class="check-ranking">
+                  랭킹확인
+                  <img src="{% static 'img/chevron-right(gray).svg' %}" alt="" />
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="rec-more-place" data-market-id="{{ market.id }}">
+            <div class="rec-header">
+              <h3>주변에 이런 장소도 있어요</h3>
+              <button class="rec-refresh" id="nearby-refresh" type="button" aria-label="새로고침">
+                <img src="{% static 'img/rotate-ccw.svg' %}" alt="새로고침" />
+              </button>
+            </div>
+
+            <div id="nearby-empty" {% if nearby_places %}hidden{% endif %}>
+              등록된 주변 장소가 없어요.
+            </div>
+
+            <div class="rec-more-place-list" id="nearby-list">
+              {% for p in nearby_places %}
+              <div class="rec-more-place-item">
+                {% if p.image %}
+                  <img src="{{ p.image.url }}" alt="추천 장소" />
+                {% else %}
+                  <img src="{% static 'img/rec-placeholder.svg' %}" alt="추천 장소" />
+                {% endif %}
+                <div class="about-place">
+                  <div class="rec-place">
+                    <span class="rec-place-name">{{ p.name }}</span>
+                    {% if p.category %}
+                      <span class="market-sort">{{ p.category }}</span>
+                    {% endif %}
+                  </div>
+                  <div class="rec-place-detail">
+                    <p>{{ p.info }}</p>
+                    <div class="rec-place-more">
+                      <p>영업중</p>
+                      <p>{{ p.distance_m }}m</p>
+                      {% if p.link_url %}
+                        <a class="more-btn" href="{{ p.link_url }}" target="_blank" rel="noopener">더보기</a>
+                      {% else %}
+                        <button class="more-btn" type="button" disabled>더보기</button>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </main>
+
+        {% comment %} 앱 자체 하단바 {% endcomment %}
+        <nav class="bottom-nav">
+          <a class="bottom-nav-item" href="{% url 'food:main' %}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="home">
+                    <path d="M15 21V13C15 12.7348 14.8946 12.4805 14.7071 12.2929C14.5196 12.1054 14.2652 12 14 12H10C9.73478 12 9.48043 12.1054 9.29289 12.2929C9.10536 12.4805 9 12.7348 9 13V21M3 10C2.99993 9.7091 3.06333 9.42165 3.18579 9.15775C3.30824 8.89384 3.4868 8.65983 3.709 8.47203L10.709 2.47303C11.07 2.16794 11.5274 2.00055 12 2.00055C12.4726 2.00055 12.93 2.16794 13.291 2.47303L20.291 8.47203C20.5132 8.65983 20.6918 8.89384 20.8142 9.15775C20.9367 9.42165 21.0001 9.7091 21 10V19C21 19.5305 20.7893 20.0392 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0392 3 19.5305 3 19V10Z" stroke="#A5A5A5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            <span class="bottom-nav-item-title">홈</span>
+          </a>
+          <a class="bottom-nav-item" href="{% url 'accounts:activity_log' %}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="my">
+                  <path d="M15.9999 17H19.9999M3.99991 13H7.99991M3.99991 16V13.62C3.99991 11.5 2.96991 10.5 2.99991 8C3.02991 5.28 4.48991 2 7.49991 2C9.36991 2 9.99991 3.8 9.99991 5.5C9.99991 8.61 7.99991 11.16 7.99991 14.18V16C7.99991 16.5304 7.7892 17.0391 7.41412 17.4142C7.03905 17.7893 6.53034 18 5.99991 18C5.46948 18 4.96077 17.7893 4.5857 17.4142C4.21062 17.0391 3.99991 16.5304 3.99991 16ZM19.9999 20V17.62C19.9999 15.5 21.0299 14.5 20.9999 12C20.9699 9.28 19.5099 6 16.4999 6C14.6299 6 13.9999 7.8 13.9999 9.5C13.9999 12.61 15.9999 15.16 15.9999 18.18V20C15.9999 20.5304 16.2106 21.0391 16.5857 21.4142C16.9608 21.7893 17.4695 22 17.9999 22C18.5303 22 19.0391 21.7893 19.4141 21.4142C19.7892 21.0391 19.9999 20.5304 19.9999 20Z" stroke="#A5A5A5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            <span class="bottom-nav-item-title">내 활동</span>
+          </a>
+          <a class="bottom-nav-item" href="{% url 'point:point_home' %}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="point">
+                    <path d="M9 17V7H13C13.7956 7 14.5587 7.31607 15.1213 7.87868C15.6839 8.44129 16 9.20435 16 10C16 10.7956 15.6839 11.5587 15.1213 12.1213C14.5587 12.6839 13.7956 13 13 13H9M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            <span class="bottom-nav-item-title">포인트</span>
+          </a>
+        </nav>
+
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        const btn = document.getElementById('nearby-refresh');
+        if (!btn) return;
+
+        async function refreshNearby() {
+          const marketId = document.querySelector('.rec-more-place')?.dataset?.marketId;
+          if (!marketId) return;
+
+          try {
+            const res = await fetch("{% url 'market:nearby_random' market.id %}");
+            if (!res.ok) {
+              const text = await res.text();
+              console.error("HTTP", res.status, text);
+              alert("서버 응답 오류: " + res.status);
+              return;
+            }
+
+            const data = await res.json();
+            const list = document.getElementById('nearby-list');
+            const empty = document.getElementById('nearby-empty');
+            list.innerHTML = "";
+
+            if (!data.ok || !data.items || data.items.length === 0) {
+              empty.hidden = false;
+              return;
+            }
+            empty.hidden = true;
+
+            for (const p of data.items) {
+              const item = document.createElement('div');
+              item.className = 'rec-more-place-item';
+              item.innerHTML = `
+                ${p.image_url
+                  ? `<img src="${p.image_url}" alt="추천 장소" />`
+                  : `<img src="{% static 'img/rec-placeholder.svg' %}" alt="추천 장소" />`
+                }
+                <div class="about-place">
+                  <div class="rec-place">
+                    <span class="rec-place-name">${p.name ?? ""}</span>
+                    ${p.category ? `<span class="market-sort">${p.category}</span>` : ""}
+                  </div>
+                  <div class="rec-place-detail">
+                    <p>${p.info ?? ""}</p>
+                    <div class="rec-place-more">
+                      <p>영업중</p>
+                      <p>${p.distance_m ?? ""}m</p>
+                      ${p.link_url ? `<a class="more-btn" href="${p.link_url}" target="_blank" rel="noopener">더보기</a>` : `<button class="more-btn" type="button" disabled>더보기</button>`}
+                    </div>
+                  </div>
+                </div>`;
+              list.appendChild(item);
+            }
+          } catch (e) {
+            console.error(e);
+            alert("주변 장소를 불러오는 중 오류가 발생했어요.");
+          }
+        }
+
+        btn.addEventListener('click', refreshNearby);
+      })();
+    </script>
+  </body>
+</html>

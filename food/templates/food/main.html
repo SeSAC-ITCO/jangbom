@@ -1,0 +1,274 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Main</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <script src="{% static 'js/main.js' %}" defer></script>
+  </head>
+  <body>
+  {% if user.is_authenticated %}
+  <div class="container">
+    <!-- 주소 미설정 모달 -->
+    {% if not user.address %}
+    <div class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <path d="M16 12V17.3333M16 22.6666H16.0133M28.9733 24L18.3067 5.33331C18.0741 4.92291 17.7368 4.58156 17.3292 4.34407C16.9217 4.10657 16.4584 3.98145 15.9867 3.98145C15.5149 3.98145 15.0517 4.10657 14.6441 4.34407C14.2365 4.58156 13.8992 4.92291 13.6667 5.33331L3 24C2.76491 24.4071 2.64164 24.8692 2.64268 25.3393C2.64372 25.8095 2.76903 26.271 3.00593 26.6771C3.24282 27.0832 3.58286 27.4194 3.99159 27.6517C4.40032 27.8841 4.86321 28.0042 5.33333 28H26.6667C27.1345 27.9995 27.594 27.8759 27.999 27.6417C28.404 27.4074 28.7403 27.0708 28.974 26.6655C29.2077 26.2602 29.3307 25.8005 29.3306 25.3326C29.3305 24.8648 29.2073 24.4052 28.9733 24Z" stroke="#D9D9D9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>        </div>
+        <div class="modal-text">주소 설정 후 이용해주세요</div>
+        <a href="{% url 'accounts:address_settings' %}">
+          <button class="modal-btn">주소 설정하기</button>
+        </a>
+      </div>
+    </div>
+    {% endif %}
+
+
+      <div class="box">
+        <!-- 상단 상태바 -->
+        <div class="status-bar">
+          <p>19:20</p>
+          <div class="status1">
+            <img
+              class="status2"
+              src="{% static 'img/reception.svg' %}"
+              alt="reception"
+            />
+            <img class="status2" src="{% static 'img/wifi.svg' %}" alt="wifi" />
+            <img
+              class="status2"
+              src="{% static 'img/battery.svg' %}"
+              alt="battery"
+            />
+          </div>
+        </div>
+
+        <!-- 앱 자체 상단바 -->
+        <div class="app-top-bar">
+          <div class="userLoc">
+            <a
+              href="{% url 'accounts:address_settings' %}"
+              aria-label="주소 설정"
+            >
+              {% if user.address == None %}
+                <p>주소를 설정해주세요</p>
+              {% else %}
+              <p>{{ user.addr_level3 }}</p>
+              <img
+                src="{% static 'img/arrow-down.svg' %}"
+                class="downIcn"
+                alt="down"
+              />
+              {% endif %}
+            </a>
+          </div>
+
+          <div class="top-point">
+            <a
+              href="{% url 'food:cart_view' %}"
+              class="basket-container"
+              aria-label="장바구니"
+            >
+              <img
+                src="{% static 'img/basket.svg' %}"
+                class="basket"
+                alt="basket"
+              />
+              <span class="basket-count">{{ cart_items_count|default:0 }}</span>
+            </a>
+            <a href="{% url 'point:barcode' %}" aria-label="바코드">
+              <img
+                src="{% static 'img/lucide.svg' %}"
+                class="point"
+                alt="point"
+              />
+            </a>
+            <a href="{% url 'point:point_home' %}" aria-label="포인트">
+              <p class="mypoint">{{ total_point|default:"0" }} P</p>
+            </a>
+          </div>
+        </div>
+
+        <main class="app-body">
+          <section id="mainBoard">
+            <div class="bannerSelect">
+              <a
+                href="?tab=mart"
+                id="mart"
+                class="clickable {% if tab == 'mart' %}active{% endif %}"
+              >
+                <p>마트</p>
+              </a>
+              <a
+                href="?tab=cafe"
+                id="cafe"
+                class="clickable {% if tab == 'cafe' %}active{% endif %}"
+              >
+                <p>카페</p>
+              </a>
+              <a
+                href="?tab=trad"
+                id="trad"
+                class="clickable {% if tab == 'trad' %}active{% endif %}"
+              >
+                <p>시장</p>
+              </a>
+            </div>
+
+            <!-- 배너 -->
+            <div id="banner">
+              {% for b in banners %}
+              <div class="banner-card">
+                {% if b.image %} {% if b.link_url %}
+                <a
+                  href="{{ b.link_url }}"
+                  aria-label="{{ b.title|default:'배너' }}"
+                >
+                  <img
+                    src="{{ b.image.url }}"
+                    alt="{{ b.title|default:'배너 이미지' }}"
+                  />
+                </a>
+                {% else %}
+                <img
+                  src="{{ b.image.url }}"
+                  alt="{{ b.title|default:'배너 이미지' }}"
+                />
+                {% endif %} {% else %} {% if b.link_url %}
+                <a
+                  href="{{ b.link_url }}"
+                  aria-label="{{ b.title|default:'배너' }}"
+                  >배너</a
+                >
+                {% else %}
+                <div>배너</div>
+                {% endif %} {% endif %}
+              </div>
+              {% empty %}
+              <p>해당 카테고리의 배너가 없어요.</p>
+              {% endfor %}
+            </div>
+
+            <div id="board">
+              <div class="promoText">
+                <div class="title1">장봄</div>
+                <div class="title2">
+                  <p> {{ user.addr_level3|default:"" }} {{ user.nickname }}님, </p>
+                  <p>한 끼를 위한 산책을 시작해요!</p>
+                </div>
+              </div>
+
+              <div class="food-ingredient">
+                <form action="{% url 'food:recipe_input' %}" method="get">
+                  <button type="submit" class="food">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="32"
+                      height="32"
+                      viewBox="0 0 32 32"
+                      fill="none"
+                    >
+                      <path
+                        d="M2.66675 16H29.3334M26.6667 16V26.6667C26.6667 27.3739 26.3858 28.0522 25.8857 28.5523C25.3856 29.0524 24.7073 29.3333 24.0001 29.3333H8.00008C7.29284 29.3333 6.61456 29.0524 6.11446 28.5523C5.61437 28.0522 5.33341 27.3739 5.33341 26.6667V16M5.33341 10.6667L26.6667 5.33333M11.8134 9.04L11.2134 6.62666C11.1274 6.28697 11.1093 5.93367 11.1599 5.58695C11.2106 5.24023 11.3291 4.9069 11.5086 4.60599C11.6882 4.30509 11.9253 4.04253 12.2063 3.83331C12.4874 3.62409 12.807 3.47231 13.1467 3.38666L15.7334 2.74666C16.074 2.66091 16.4282 2.64328 16.7756 2.69479C17.123 2.74629 17.4568 2.86592 17.7579 3.0468C18.0589 3.22769 18.3213 3.46626 18.5299 3.74881C18.7385 4.03137 18.8892 4.35236 18.9734 4.69333L19.5734 7.09333"
+                        stroke="#D9D9D9"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                    <p>요리 하기</p>
+                  </button>
+                </form>
+
+                <form action="{% url 'food:ingredient_input' %}" method="get">
+                  <button type="submit" class="ingredient">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="32"
+                      height="32"
+                      viewBox="0 0 32 32"
+                      fill="none"
+                    >
+                      <path
+                        d="M9.33333 28H22.6667M15.1733 16C14.3658 16.0075 13.5853 15.7094 12.9884 15.1656C12.3914 14.6217 12.0222 13.8722 11.9547 13.0675C11.8872 12.2628 12.1265 11.4623 12.6245 10.8266C13.1225 10.1909 13.8425 9.76704 14.64 9.63998C14.5123 9.07495 14.5404 8.48586 14.7213 7.93554C14.9021 7.38522 15.229 6.89432 15.667 6.51519C16.1049 6.13607 16.6376 5.88294 17.2082 5.78281C17.7787 5.68268 18.3658 5.73931 18.9067 5.94665C19.1435 5.5738 19.455 5.25402 19.8215 5.00744C20.188 4.76087 20.6015 4.59284 21.0361 4.51394C21.4707 4.43503 21.917 4.44696 22.3468 4.54896C22.7765 4.65097 23.1805 4.84085 23.5333 5.10665C24.1488 4.62294 24.9201 4.38159 25.7015 4.42824C26.4828 4.47489 27.22 4.80632 27.7735 5.35981C28.327 5.9133 28.6584 6.65047 28.7051 7.43183C28.7517 8.2132 28.5104 8.98456 28.0267 9.59998C28.3277 9.99989 28.5308 10.4648 28.6195 10.9575C28.7082 11.4501 28.6801 11.9567 28.5375 12.4365C28.3948 12.9163 28.1416 13.356 27.7982 13.7202C27.4547 14.0843 27.0306 14.3628 26.56 14.5333C26.6817 15.0132 26.6953 15.5141 26.6 16M17.3333 16L22.6667 10.6666M14.5333 9.66665C13.802 8.887 12.8527 8.34576 11.8093 8.11348C10.7659 7.88119 9.67666 7.96862 8.68364 8.36439C7.69063 8.76016 6.83987 9.4459 6.24226 10.3322C5.64465 11.2185 5.32792 12.2643 5.33333 13.3333C5.33333 14.3066 5.6 15.2133 6.05333 16M16 28C19.1826 28 22.2348 26.7357 24.4853 24.4853C26.7357 22.2348 28 19.1826 28 16H4C4 19.1826 5.26428 22.2348 7.51472 24.4853C9.76515 26.7357 12.8174 28 16 28Z"
+                        stroke="#D9D9D9"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                    <p>식재료 사기</p>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <!-- 앱 자체 하단바 -->
+        <nav class="bottom-nav">
+          <a class="bottom-nav-item" href="{% url 'food:main' %}">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+            >
+              <path
+                d="M15 21V13C15 12.7348 14.8946 12.4805 14.7071 12.2929C14.5196 12.1054 14.2652 12 14 12H10C9.73478 12 9.48043 12.1054 9.29289 12.2929C9.10536 12.4805 9 12.7348 9 13V21M3 10C2.99993 9.7091 3.06333 9.42165 3.18579 9.15775C3.30824 8.89384 3.4868 8.65983 3.709 8.47203L10.709 2.47303C11.07 2.16794 11.5274 2.00055 12 2.00055C12.4726 2.00055 12.93 2.16794 13.291 2.47303L20.291 8.47203C20.5132 8.65983 20.6918 8.89384 20.8142 9.15775C20.9367 9.42165 21.0001 9.7091 21 10V19C21 19.5305 20.7893 20.0392 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0392 3 19.5305 3 19V10Z"
+                stroke="black"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span class="bottom-nav-item-title" style="color: black">홈</span>
+          </a>
+          <a class="bottom-nav-item" href="{% url 'accounts:activity_log' %}">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+            >
+              <path
+                d="M15.9999 17H19.9999M3.99991 13H7.99991M3.99991 16V13.62C3.99991 11.5 2.96991 10.5 2.99991 8C3.02991 5.28 4.48991 2 7.49991 2C9.36991 2 9.99991 3.8 9.99991 5.5C9.99991 8.61 7.99991 11.16 7.99991 14.18V16C7.99991 16.5304 7.7892 17.0391 7.41412 17.4142C7.03905 17.7893 6.53034 18 5.99991 18C5.46948 18 4.96077 17.7893 4.5857 17.4142C4.21062 17.0391 3.99991 16.5304 3.99991 16ZM19.9999 20V17.62C19.9999 15.5 21.0299 14.5 20.9999 12C20.9699 9.28 19.5099 6 16.4999 6C14.6299 6 13.9999 7.8 13.9999 9.5C13.9999 12.61 15.9999 15.16 15.9999 18.18V20C15.9999 20.5304 16.2106 21.0391 16.5857 21.4142C16.9608 21.7893 17.4695 22 17.9999 22C18.5303 22 19.0391 21.7893 19.4141 21.4142C19.7892 21.0391 19.9999 20.5304 19.9999 20Z"
+                stroke="#A5A5A5"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span class="bottom-nav-item-title">내 활동</span>
+          </a>
+          <a class="bottom-nav-item" href="{% url 'point:point_home' %}">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+            >
+              <path
+                d="M9 17V7H13C13.7956 7 14.5587 7.31607 15.1213 7.87868C15.6839 8.44129 16 9.20435 16 10C16 10.7956 15.6839 11.5587 15.1213 12.1213C14.5587 12.6839 13.7956 13 13 13H9M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z"
+                stroke="#A5A5A5"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span class="bottom-nav-item-title">포인트</span>
+          </a>
+        </nav>
+
+        <!-- 데모용 -->
+        <a href="{% url 'accounts:logout' %}">[로그아웃]</a>
+      </div>
+    </div>
+    {% endif %}
+  </body>
+</html>

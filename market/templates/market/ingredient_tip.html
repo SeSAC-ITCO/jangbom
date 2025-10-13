@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/ingredient_tip.css' %}" />
+    <title>{{ name }} 구매 TIP</title>
+    <style>
+      .tip-send img { filter: none; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box tip-page">
+        <div class="status-bar">
+          <p>19:20</p>
+          <div class="status1">
+            <img class="status2" src="{% static 'img/reception.svg' %}" alt="reception" />
+            <img class="status2" src="{% static 'img/wifi.svg' %}" alt="wifi" />
+            <img class="status2" src="{% static 'img/battery.svg' %}" alt="battery" />
+          </div>
+        </div>
+
+        <div class="app-top-bar">
+          <button type="button" class="top-back" aria-label="닫기" onclick="history.back()">
+            <img src="{% static 'img/chevron-x(gray).svg' %}" alt="뒤로 가기" />
+          </button>
+        </div>
+
+        <div class="tip-header">
+          <h3>{{ name }} 구매 TIP</h3>
+        </div>
+
+        <main class="tip-body">
+          <div id="chat" aria-live="polite"></div>
+        </main>
+
+        <div class="tip-inputbar">
+          <div class="tip-input">
+            <input id="q" type="text" placeholder="궁금한 정보가 더 있으신가요?" autocomplete="off" />
+            <button id="send" class="tip-send" type="button" aria-label="보내기">
+              <img src="{% static 'img/arrow-up(green).svg' %}" alt="">
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.TIP_CONFIG = {
+        api: "{% url 'market:ingredient_tip_api' %}",
+        name: "{{ name|escapejs }}"
+      };
+    </script>
+    <script src="{% static 'js/ingredient_tip.js' %}" defer></script>
+  </body>
+</html>

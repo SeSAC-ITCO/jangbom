@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/signup-id.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/signup-password.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/signup-user.css' %}" />
+    <script src="{% static 'js/signup.js' %}" defer></script>
+    <title>회원가입</title>
+    <style>
+        .step { display: none; }
+        .step.active { display: block; }
+    </style>
+</head>
+<body>
+    <div id="Container">
+        <img id="statusBar" src="{% static 'img/iPhone Status bar.png' %}"/>
+        <a href="{% url 'accounts:login' %}">
+            <img class="backIcon" src="{% static 'img/chevron-left.svg' %}"/>
+        </a>
+
+        <div class="mainBoard">
+            <form method="post" action="{% url 'accounts:signup' %}"> 
+                {% csrf_token %} 
+
+                <!-- Step 1: 아이디 -->
+                <div class="step active" id="step1">
+                    <div class="pageNum">1/3</div>
+                    <div class="text"><p>사용할 아이디를 <br>입력해 주세요</p></div>
+                    <div class="idBox">
+                        <p>아이디</p>
+                        <div class="idInput">
+                            <input id="id" name="username" placeholder="2자 이상 입력해 주세요" required/>
+                        </div>
+                    </div>
+                    <button type="button" onclick="goStep(2)"><p>다음</p></button>
+                </div>
+
+                <!-- Step 2: 비밀번호 -->
+                <div class="step" id="step2">
+                    <div class="pageNum">2/3</div>
+                    <div class="text"><p>사용할 비밀번호를 <br>입력해 주세요</p></div>
+                    <div class="passwordBox">
+                        <p>비밀번호</p>
+                        <div class="passwordInput">
+                            <input type="password" id="repassword" name="password2" placeholder="8자 이상 입력해 주세요" required/>
+                        </div>
+                        <div class="exText">
+                            <div class="lenText">
+                                <img src="{% static 'img/check.svg' %}">
+                                <p>8-20자 이내</p>
+                            </div>
+                            <div class="specialText">
+                                <img src="{% static 'img/check.svg' %}">
+                                <p>특수문자 포함</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="repasswordBox">
+                        <p>비밀번호 확인</p>
+                        <div class="repasswordInput">
+                            <input type="password" id="password" name="password1" placeholder="8자 이상 입력해 주세요" required/>
+                        </div>
+                        <div class="exText">
+                            <div class="checkText">
+                                <img src="{% static 'img/check.svg' %}">
+                                <p>비밀번호 일치</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" onclick="goStep(3)"><p>다음</p></button>
+                </div>
+
+                <!-- Step 3: 닉네임 -->
+                <div class="step" id="step3">
+                    <div class="pageNum">3/3</div>
+                    <div class="text"><p>사용하실 닉네임을 <br>입력해 주세요</p></div>
+                    <div class="userBox">
+                        <p>닉네임</p>
+                        <div class="userInput">
+                            <input id="user" name="nickname" placeholder="2자 이상 입력해 주세요" required/>
+                        </div>
+                    </div>
+                    <button type="submit" class="completeBtn"><p>완료</p></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,159 @@
+* {
+    font-family: 'Pretendard';
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+#Container{
+    width: 393px;
+    height: 852px;
+    position: relative;
+    margin: 0 auto;
+    border: 1px solid var(--Gray-Primary, #d9d9d9);
+}
+
+/* 메인 멘트 */
+.titleBox{
+    margin-top: 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.title2{
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.ment1{
+    color: #545454;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: normal;
+}
+.ment2{
+    color: #545454;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: normal;
+}
+
+/* 로그인 부분 */
+#loginInput{
+    margin:51px 25px  0 25px;
+    width: 341px;
+}
+
+/* 아이디 입력 부분 */
+.idBox{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    /* width: 100%; */
+}
+.idBox p {
+    color: #545454;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: normal;
+}
+.idInput{
+    display: flex;
+    height: 44px;
+    padding: 10px 21px;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    border-radius: 20px;
+    background: #F5F5F5;
+}
+
+
+/* 비밀번호 입력 부분 */
+
+.passwordBox{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 10px;
+}
+.passwordBox p {
+    color: #545454;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: normal;
+}
+.passwordInput{
+    display: flex;
+    height: 44px;
+    padding: 10px 21px;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    border-radius: 20px;
+    background: #F5F5F5;
+}
+
+/* 찾기 버튼, 회원가입 */
+
+.exBtn{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 36px;
+    padding: 0 10px;
+    white-space: nowrap;
+}
+
+.exBtn a {
+    color: #545454;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: normal;
+}
+
+/* 로그인 하기 버튼 */
+button {
+    position: absolute;
+    display: flex;
+    width: 271px;
+    height: 53px;
+    padding: 14px 55px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    background: #BEDA78;
+    bottom:105px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+button p{
+    color: #FFF;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: normal;
+}
+
+
+input {
+    background: #F5F5F5;
+    font-size: 15px;
+}
+input::placeholder {
+    color: #D9D9D9;  /* 원하는 색상으로 변경 */
+}

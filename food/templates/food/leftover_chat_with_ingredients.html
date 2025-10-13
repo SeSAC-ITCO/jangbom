@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/food_leftover_chat_with_ingredients.css' %}" />
+    <script src="{% static 'js/food_leftover_chat_with_ingredients.js' %}" defer></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="Container">
+        <img id="statusBar" src="{% static 'img/iPhone Status bar.png' %}"/>
+        <div id="pointBar">
+            <a href="{% url 'food:recipe_input' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path d="M20 24L12 16L20 8" stroke="#D9D9D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+            <div class="userBar">
+                <a href="{% url 'food:cart_view' %}" class="basket-container">
+                    {% if cart_items_count == 0 %}
+                        <img src="{% static 'img/basket.svg' %}" class="basket" alt="basket">
+                        <span class="basket-count">{{ cart_items_count }}</span>
+                    {% else %}
+                        <img src="{% static 'img/basket.svg' %}" class="basket" alt="basket">
+                        <span class="basket-count">{{ cart_items_count }}</span>
+                    {% endif %}
+                </a>
+                <a href="{% url 'point:barcode' %}"><img src="{% static 'img/lucide.svg' %}" class="lucide" alt="lucide"></a>
+                <a href="{% url 'point:point_home' %} "><div class="pointNum"><p>{{ total_point }}P</p></div></a>
+            </div>
+        </div>
+        <div class="mainMent">
+                <div class="userFood">
+                    <p>{{ selected_names|join:", " }}로</p>
+                    <p>이런 요리를 할 수 있어요!</p>
+                </div>
+        </div>
+        <div id="mainBoard">
+            {% for m in chat %}
+                <div class="chatBoard">
+                    {% if m.role == "user" %}
+                        <div class="userMsg">
+                            <p>{{ m.content }}</p>
+                        </div>
+                    {% else %}
+                        <div class="gptMsg">
+                            <p>{{ m.content }}</p>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+
+        <div id="gptBox">
+            <form method="post" class="inputBar" action="">
+                {% csrf_token %}
+                <input type="text" name="message" row=3 placeholder="요리명을 입력해주세요" value="" class="gptInput">
+                <button type="submit" class="rightArrow">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 5L19 12M19 12L12 19M19 12H5" stroke="#ACCE58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </form>
+        </div>
+
+        
+        <form method="get" class="ingredientsGet" action="{% url 'food:save_last_recipe' %}">
+            {% csrf_token %}
+            <input type="hidden" name="recipe" value="{{ latest_recipe }}">
+            <button type="submit" class="foodBtn" id="openModalBtn"> 
+                {% if last_recipe_title %}
+                    {{ last_recipe_title }} 저장하기
+                {% else %}
+                    요리법 저장하기
+                {% endif %}
+            </button>
+        </form>
+
+        <img src="{% static 'img/iOS.png' %}" alt="keyboard" class="keyboard-icon">
+
+        
+        <!-- 모달 -->
+        
+        {% if saved_title %}
+        <dialog id="savedRecipeDialog">
+            <div class="modal-content">
+                <!-- 닫기 버튼 -->
+                <button value="close" id="backBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <path d="M24 8L8 24M8 8L24 24" stroke="#D9D9D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+
+                <div class="model-ment">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <path d="M29.0681 13.3333C29.6771 16.3217 29.2431 19.4286 27.8386 22.1357C26.4341 24.8429 24.144 26.9867 21.3502 28.2097C18.5563 29.4328 15.4276 29.661 12.4859 28.8565C9.5441 28.0519 6.96705 26.2632 5.1845 23.7885C3.40195 21.3139 2.52163 18.303 2.69035 15.2578C2.85907 12.2127 4.06664 9.31744 6.11167 7.05488C8.1567 4.79232 10.9156 3.29923 13.9282 2.82459C16.9409 2.34995 20.0252 2.92247 22.6668 4.44665M12.0001 14.6667L16.0001 18.6667L29.3335 5.33332" stroke="#ACCE58" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p>요리법 저장 완료</p>                    
+                </div>
+
+                <!-- 확인 버튼 -->
+                <button type="button" id="confirmBtn" data-href="{% url 'accounts:my_recipes' %}">
+                    저장한 요리법 보러 가기
+                </button>
+            </div>
+        </dialog>
+        {% endif %}
+
+    </div>
+</body>
+</html>

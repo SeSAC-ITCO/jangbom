@@ -1,0 +1,291 @@
+* {
+    font-family: 'Pretendard';
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    text-decoration: none;
+    background: none; 
+}
+
+#Container{
+    position: relative;
+    width: 393px;
+    height: 852px;
+    margin: 0 auto;
+    border: 1px solid var(--Gray-Primary, #d9d9d9);
+}
+.basket-container {
+    position: relative;
+    display: inline-block;
+}
+
+.basket-count {
+    position: absolute;
+    bottom: -1px;  /* 아래쪽으로 */
+    right: -6px;   /* 오른쪽으로 */
+    background: #545454;
+    color: #FFFFFF;
+    font-size: 10px;
+    font-weight: 300;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* 상단 바 */
+#pointBar{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+}
+
+
+.userBar{
+    display: inline-flex;
+    padding: 0 15px;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid #ccc; */
+    gap: 5px;
+}
+
+.pointNum{
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 20px;
+    background: #F5F5F5;
+    padding: 5px 17px;
+    max-width: 120px;    
+}
+
+.pointNum p {
+    color: #545454;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: normal;
+    white-space: nowrap;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+
+/* 메인 보드 */
+#mainBoard{
+    margin: 0 25px;
+}
+
+.mainMent{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 12px;
+    gap: 12px;
+}
+.userFood p{
+    color: #545454;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.userFood{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.date p{
+    color: #000;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 300;
+    line-height: normal;
+}
+
+
+
+/* 요리&식재료 선택 버튼 부분 */
+.selectBtn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 280px;
+    gap: 28px;
+}
+
+.selectBtn button{
+    display: flex;
+    width: 308px;
+    height: 120px;
+    padding: 21px 22px;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 10px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    background: #F5F5F5;
+    transition: background 0.3s;
+}
+
+.selectBtn button:hover {
+    background: #D7E5B4; /* 마우스 올렸을 때 색상 */
+    cursor: pointer;      /* 마우스 커서도 포인터로 변경 */
+}
+
+.selectBtn button:hover svg path {
+    stroke: #545454 !important;   
+}
+
+.foodRecommend, .otherIngredient {
+    position: relative;
+}
+.foodRecommend svg, .otherIngredient svg{
+    position:absolute;
+    top:15px;
+    left:21px;
+}
+
+.textBox{
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-end;  
+    gap: 6px;
+}
+.text1{
+    color: #000;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: normal;
+}
+.text2{
+    color: #545454;
+    text-align: right;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: normal;
+}
+.text22{
+    color: #545454;
+    text-align: right;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: normal;
+}
+
+
+/* gpt 부분 */
+
+#gptBox{
+    display: flex;
+    padding: 13px 13px 12px 21px;
+    align-items: center;
+    border-radius: 20px;
+    border: 1px solid #D9D9D9;
+    background: #FFF;
+    position: absolute;
+    bottom: 20px;
+    left: 24px;
+    width: 346px;
+    transition: transform 0.3s ease;
+}
+
+.inputBar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap:5px;
+    justify-content: space-between;
+}
+.gptInput{
+    width:100%
+}
+.gptInput::placeholder {
+    color: #D9D9D9;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: normal;
+}
+
+
+
+
+/* input이 입력될 떄 키보드 생성 */
+/* 기본 상태는 키보드 이미지 숨김 */
+
+
+/* 키보드 이미지 */
+.keyboard-icon {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 393px;
+    height: 305px;
+    display: none;
+    z-index: 1000;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+
+#gptBox.up {
+    bottom: 615px; /* 키보드 높이(305px) + 여유(20px) 만큼 올림 */
+    transition: bottom 0.3s ease;
+    z-index: 1001;
+}
+
+
+.selectBtn.hidden {
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+    pointer-events: none; 
+}
+
+
+.foodBtn {
+    display: flex ;             /* flex 컨테이너로 만듦 */
+    justify-content: center;    /* 가로 중앙 정렬 */
+    align-items: center;        /* 세로 중앙 정렬 */
+    width: 271px;
+    height: 53px;
+    padding: 14px 0;
+    gap: 10px;
+    flex-shrink: 0;
+    border-radius: 15px;
+    margin-left: 61px;
+    background: #BEDA78;
+    border: none;               /* 버튼 기본 테두리 제거 */
+    cursor: pointer;            /* 커서 포인터로 변경 */
+    color: #FFF;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.foodBtn p{
+    color: #FFF;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+        display: flex;
+    line-height: normal;
+        justify-content: center;
+    align-items: center;
+}

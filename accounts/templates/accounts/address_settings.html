@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/address_settings.css' %}" />
+    <title>주소 설정</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box">
+        <!--상단바-->
+        <div class="status-bar">
+          <p>19:20</p>
+          <div class="status1">
+            <img class="status2" src="{% static 'img/reception.svg' %}" alt="reception" />
+            <img class="status2" src="{% static 'img/wifi.svg' %}" alt="wifi" />
+            <img class="status2" src="{% static 'img/battery.svg' %}" alt="battery" />
+          </div>
+        </div>
+
+        <!--앱 자체 상단바-->
+        <div class="app-top-bar">
+          <a href="{% url 'food:main' %}" class="top-back-link" aria-label="뒤로 가기">
+            <img class="top-back" src="{% static 'img/chevron-left(gray).svg' %}" alt="뒤로 가기" />
+          </a>
+        </div>
+
+        <div class="address-search">
+          <h2 class="app-title">주소 설정</h2>
+
+          <div class="addr-inputbar">
+            <form action="{% url 'accounts:address_search' %}" method="get" class="addr-input" role="search">
+              <button type="submit" class="addr-send" aria-label="검색">
+                <img src="{% static 'img/search.svg' %}" alt="검색" />
+              </button>
+              <input
+                id="q"
+                name="q"
+                type="text"
+                placeholder="지번, 도로명, 건물명으로 검색"
+                autocomplete="off"
+                aria-label="주소 검색 입력"
+                value="{{ request.GET.q|default_if_none:'' }}"
+              />
+            </form>
+          </div>
+
+          <a class="search-nowloc" href="{% url 'accounts:address_pick_map' %}">
+            <img src="{% static 'img/locate-fixed.svg' %}" alt="현재 위치" />
+            <p class="search-nowloc-p">현재 위치로 찾기</p>
+          </a>
+
+          <section class="fixed-address-wrap">
+            {% if current %}
+              <div class="fixed-address" role="group" aria-label="현재 대표 주소">
+                <img src="{% static 'img/map-pin.svg' %}" alt="" aria-hidden="true" />
+                <div class="fixed-status">
+                  <p>현재 설정된 주소</p>
+                  <span class="fixed-address-content">
+                    {{ current.address }}
+                  </span>
+                  <small class="fixed-address-sub">
+                    {{ current.addr_level1 }} {{ current.addr_level2 }} {{ current.addr_level3 }}
+                  </small>
+                </div>
+                <img src="{% static 'img/chevron-x(gray).svg' %}" alt="" aria-hidden="true" />
+              </div>
+            {% else %}
+              <div class="fixed-address empty">
+                <img src="{% static 'img/map-pin.svg' %}" alt="" aria-hidden="true" />
+                <div class="fixed-status">
+                  <p>현재 설정된 주소</p>
+                  <span class="fixed-address-content">대표 주소가 설정되어 있지 않습니다.</span>
+                </div>
+              </div>
+            {% endif %}
+          </section>
+        </div>
+
+        <section class="recent-record">
+          <span>최근 기록</span>
+
+          {% if recents %}
+            <div class="recent-record-list">
+              <ul>
+                {% for a in recents %}
+                  <li class="recent-item">
+                    <img src="{% static 'img/map-pin(gray).svg' %}" alt="" aria-hidden="true" />
+                    <a class="recent-link" href="{% url 'accounts:address_select_primary' a.id %}">
+                      <div class="recent-text">
+                        <span class="recent-address">{{ a.address }}</span>
+                        <small class="recent-sub">
+                          {{ a.addr_level1 }} {{ a.addr_level2 }} {{ a.addr_level3 }}
+                        </small>
+                      </div>
+                    </a>
+                    {% if user.selected_address_id == a.id %}
+                      <button type="button" class="recent-del-btn" title="대표 주소는 삭제할 수 없습니다" disabled>
+                        <img src="{% static 'img/chevron-x(gray).svg' %}" alt="삭제" />
+                      </button>
+                    {% else %}
+                      <form method="post" action="{% url 'accounts:address_delete' a.id %}" class="recent-del-form">
+                        {% csrf_token %}
+                        <button type="submit" class="recent-del-btn" title="삭제" aria-label="삭제">
+                          <img src="{% static 'img/chevron-x(gray).svg' %}" alt="삭제" />
+                        </button>
+                      </form>
+                    {% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% else %}
+            <p class="recent-empty">최근 기록이 없습니다.</p>
+          {% endif %}
+        </section>
+      </div>
+    </div>
+    <script src="{% static 'js/address_settings.js' %}" defer></script>
+    <script>
+      document.addEventListener('click', function (e) {
+        const delBtn = e.target.closest('.recent-del-btn');
+        if (delBtn) e.stopPropagation();
+      });
+    </script>
+  </body>
+</html>

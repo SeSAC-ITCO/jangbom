@@ -1,0 +1,258 @@
+* {
+    font-family: 'Pretendard';
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    text-decoration: none;
+    cursor: default;
+    caret-color: transparent;
+}
+
+#Container{
+    position: relative;
+    width: 393px;
+    height: 852px;
+    margin: 0 auto;
+    border: 1px solid var(--Gray-Primary, #d9d9d9);
+}
+.basket-container {
+    position: relative;
+    display: inline-block;
+}
+
+.basket-count {
+    position: absolute;
+    bottom: -1px;  /* 아래쪽으로 */
+    right: -6px;   /* 오른쪽으로 */
+    background: #545454;
+    color: #FFFFFF;
+    font-size: 10px;
+    font-weight: 300;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* 상단 바 */
+#pointBar{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+}
+
+
+.userBar{
+    display: inline-flex;
+    padding: 0 15px;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid #ccc; */
+    gap: 5px;
+}
+
+.pointNum{
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 20px;
+    background: #F5F5F5;
+    padding: 5px 17px;
+    max-width: 120px;    
+}
+
+.pointNum p {
+    color: #545454;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: normal;
+    white-space: nowrap;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 멘트부분 */
+.mainMent{
+    margin : 12px auto;
+}
+.userFood{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+.text1{
+    color: #545454;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: normal;
+}
+.text2{
+    color: #000;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: normal;
+}
+
+/* 메인 보드 */
+#mainBoard {
+    position: absolute;       
+    left: 50%; 
+    top:180px; 
+    bottom: 190px;    
+    transform: translateX(-50%);
+
+    overflow-y: auto;       /* 스크롤 가능 */
+    scrollbar-width: none;  /* Firefox 스크롤바 숨김 */
+}
+#mainBoard * {
+user-select: none;
+}
+
+#mainBoard::-webkit-scrollbar {
+    display: none; /* Chrome, Safari 스크롤바 숨김 */
+}
+
+
+.imgBoard{
+        display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2열 고정 */
+    column-gap: 38px; /* 가로 간격 */
+    row-gap: 20px;
+    padding: 12px 40px;
+    justify-items: center; /* 카드 가운데 정렬 */
+}
+
+.ingredientsImg {
+    text-align: center; 
+        width: 130px;width: 130px;
+}
+
+.ingredientsImg img{
+    border-radius: 20px;
+    border: 1px solid #D9D9D9;
+    background: #FFF;
+    width: 100%;
+}
+.ingredients{
+    color: #000;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: normal;
+}
+
+
+/* 상점필터&장보러 가기 버튼 */
+.selectTab{
+    position: absolute;
+    bottom: 65px;
+    display: flex;
+    width: 100%;
+    padding: 16px 61px 16px 61px;
+    flex-direction: column;
+    align-items: center;
+    gap: 13px;
+}
+.storeFilter{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+.selectTab p{
+    color: #545454;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.buyBtn {
+    display: flex;
+    height: 53px;
+    width: 100%;
+    padding: 14px 0;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 15px;
+    background: #BEDA78;
+
+    color: #FFF;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: normal;
+}
+
+
+
+
+/* 하단 탭 */
+#bottomTab {
+    position: absolute ;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 65px;
+    padding: 12px 60px;
+    border-top: 1px solid #EBE9E9;
+    background: #F5F5F5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    gap: 68px;
+}
+#bottomTab p{
+    color: #000;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.homeTab, .myTab, .pointTab{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 4px;
+}
+
+#bottomTab p {
+    color: #A5A5A5; /* 기본 글자 색상 - 연한 회색 */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+#bottomTab a.active p{
+  color: #000000; /* 활성 탭 글자 색상 - 진한 검정 */
+}
+
+#bottomTab a svg path {
+    stroke: #A5A5A5; /* 기본 아이콘 색상 */
+    transition: stroke 0.3s;
+}
+
+#bottomTab a.active svg path {
+  stroke: #000000; /* 활성 아이콘 색상 */
+}
+
+
+
+
+

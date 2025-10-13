@@ -1,0 +1,96 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/market_filter_form_ingredient.css' %}" />
+    <title>Document</title>
+</head>
+<body>
+    <div id="Container">
+        <img id="statusBar" src="{% static 'img/iPhone Status bar.png' %}"/>
+        <div id="pointBar">
+            <a href="{% url 'food:confirm_shopping_list' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path d="M24 8L8 24M8 8L24 24" stroke="#D9D9D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+        </div>
+
+        <div class="mainMent">
+            <p>상점 필터 설정</p>
+        </div>
+
+        <div id="mainBoard">
+            <form method="post" action="{% url 'market:edit_market_filter_ingredient' %}" id="filterForm">
+                {% csrf_token %}
+                {% if request.GET.next %}
+                    <input type="hidden" name="next" value="{{ request.GET.next }}">
+                {% endif %}
+
+                <!-- 거리 -->
+                <div class="subTitle">거리</div>
+                
+                <label>
+                    1km 이내만 보여주세요
+                    <input type="checkbox" name="distance_preference" value="within_1km"
+                        {% if filter.distance_preference == "within_1km" %}checked{% endif %}>
+                    <span></span>
+                </label>
+
+                <label>
+                    상관 없어요
+                    <input type="checkbox" name="distance_preference" value="any_2km"
+                            {% if filter.distance_preference == "any_2km" %}checked{% endif %}>
+                    <span></span>
+                </label>
+
+
+                <!-- 상점 종류 -->
+                <div class="subTitle">상점 종류</div>
+
+                <label>
+                    동네 마트를 우선 보여주세요
+                    <input type="checkbox" name="type_preference" value="mart"
+                            {% if filter.type_preference == "mart" %}checked{% endif %}>
+                    <span></span>
+                </label>
+
+                <label>
+                    전통 시장을 우선 보여주세요
+                <input type="checkbox" name="type_preference" value="trad"
+                        {% if filter.type_preference == "trad" %}checked{% endif %}>
+                    <span></span>
+                </label>
+
+                <label>
+                    상관 없어요
+                    <input type="checkbox" name="type_preference" value="none"
+                        {% if filter.type_preference == "none" %}checked{% endif %}>
+                    <span></span>
+                </label>
+
+                <button type="submit" class="savaBtn">저장하기</button>
+            </form>
+        </div>
+
+    </div>
+</body>
+
+<script>
+    function makeExclusive(name) {
+    const boxes = Array.from(document.querySelectorAll(`input[type=checkbox][name="${name}"]`));
+    boxes.forEach(b => {
+        b.addEventListener('change', function () {
+        if (this.checked) {
+            boxes.forEach(x => { if (x !== this) x.checked = false; });
+        }
+        });
+    });
+    }
+    makeExclusive('distance_preference');
+    makeExclusive('type_preference');
+</script>
+
+</html>

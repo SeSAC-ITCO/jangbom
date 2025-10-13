@@ -1,0 +1,156 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/market_arrival.css' %}" />
+    <title>도착 완료</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box">
+        {% comment %} 상단바 {% endcomment %}
+        <div class="status-bar">
+          <p>19:20</p>
+          <div class="status1">
+            <img class="status2" src="{% static 'img/reception.svg' %}" alt="reception" />
+            <img class="status2" src="{% static 'img/wifi.svg' %}" alt="wifi" />
+            <img class="status2" src="{% static 'img/battery.svg' %}" alt="battery" />
+          </div>
+        </div>
+
+        {% comment %} 앱 자체 상단바 {% endcomment %}
+        <div class="app-top-bar">
+          <button type="button" class="top-back" aria-label="뒤로가기" onclick="history.back()">
+            <img src="{% static 'img/chevron-left.svg' %}" alt="back" />
+          </button>
+          <div class="top-point">
+            <a href="{% url 'point:barcode' %}" class="top-barcode">
+              <img class="point" src="{% static 'img/lucide.svg' %}" alt="point" />
+            </a>
+            <p class="mypoint">{{ total_point }} P</p>
+          </div>
+        </div>
+
+        <main class="app-body">
+          <div class="circle-wrap">
+            <div class="circle-point">
+              <span class="emoji-newpoint">도착 완료</span>
+              <p class="emoji-totalpoint">총 {{ expected_time }}분, {{ distance_m }}m 걸었어요</p>
+            </div>
+            <img class="emoji" src="{% static 'img/박.svg' %}" alt="축하" />
+          </div>
+
+          <div class="about-point">
+            <div class="point-history">{{ user.addr_level3 }} {{ user.nickname }}님이 해냈어요!</div>
+            <div class="point-history-set">
+              {% for line in praise_lines %}
+                <p>✔️ {{ line }}</p>
+              {% empty %}
+                <p>✔️ 배달·포장 없는 장보기</p>
+                <p>✔️ 탄소 없는 도보 쇼핑</p>
+              {% endfor %}
+            </div>
+          </div>
+
+          {% if market.market_type == 'mart' and market.image %}
+          <section class="section-title">
+            <div class="section-title2">
+              입구 사진 확인하기
+              <img class="center-arrow" src="{% static 'img/chevron-down.svg' %}" alt="more" />
+            </div>
+            <div class="mart-pic">
+              <img src="{{ market.image.url }}" alt="{{ market.name }} 입구 사진" />
+            </div>
+            <div class="not-this-mart">
+              <img src="{% static 'img/circle-question-mark.svg' %}" alt="" />
+              <p>사진과 도착지가 다르다면?</p>
+            </div>
+          </section>
+          {% endif %}
+
+          <h4 class="section-title2 mt-6">
+            장바구니 체크리스트
+            <img class="center-arrow" src="{% static 'img/chevron-down.svg' %}" alt="more" />
+          </h4>
+
+          <form
+            id="checklistForm"
+            method="post"
+            action="{% url 'market:save_selected_ingredients' shopping_list.id %}"
+          >
+            {% csrf_token %}
+            <input
+              type="hidden"
+              name="next"
+              value="{% url 'market:secret_input' market.id %}?shoppinglist_id={{ shopping_list.id }}&point_earned={{ point_earned }}"
+            />
+
+            <div class="checklist-card">
+              {% if market.market_type == 'mart' %}
+                {% for item in matched_ingredients %}
+                  <label class="cl-item">
+                    <div>
+                      <span class="cl-name">{{ item.name }}</span>
+                      <a class="tip-pill" href="{% url 'market:ingredient_tip_page' %}?name={{ item.name|urlencode }}">구매 TIP</a>
+                    </div>
+                    <input type="checkbox" class="cl-check" name="items" value="{{ item.name }}" />
+                  </label>
+                {% empty %}
+                  <p>장바구니에 재료가 없습니다.</p>
+                {% endfor %}
+              {% elif market.market_type == 'trad' %}
+                {% for item in unmatched_ingredients %}
+                  <label class="cl-item">
+                    <div>
+                      <span class="cl-name">{{ item.name }}</span>
+                      <a class="tip-pill" href="{% url 'market:ingredient_tip_page' %}?name={{ item.name|urlencode }}">구매 TIP</a>
+                    </div>
+                    <input type="checkbox" class="cl-check" name="items" value="{{ item.name }}" />
+                  </label>
+                {% empty %}
+                  <p>장바구니에 재료가 없습니다.</p>
+                {% endfor %}
+              {% endif %}
+            </div>
+          </form>
+        </main>
+
+        <footer class="bottom-cta">
+          <button type="button" class="refreshBtn" id="submitChecklistBtn">
+            구매 인증하고 포인트 받기
+          </button>
+        </footer>
+      </div>
+    </div>
+
+    <div class="re-start-modal hidden" id="reStartModal" aria-hidden="true">
+      <div class="modal-content">
+        <img class="closeBtn" src="{% static 'img/chevron-x(gray).svg' %}" alt="닫기" />
+        <h2 class="modal-title">괜찮아요<br />다시 안내해드릴게요!</h2>
+        <p>GPS 오차 또는 사진 변경 등으로<br />불일치하는 경우가 있어요</p>
+        <div class="modal-buttons">
+          <button class="callBtn" type="button">상점에 전화걸기</button>
+          <button class="renavigationBtn" type="button">다시 길 찾기</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="{% static 'js/market_arrival.js' %}" defer></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const submitBtn = document.getElementById("submitChecklistBtn");
+        const form = document.getElementById("checklistForm");
+        submitBtn?.addEventListener("click", () => form?.submit());
+
+        const mismatch = document.querySelector(".not-this-mart");
+        const modal = document.getElementById("reStartModal");
+        const closeBtn = document.querySelector(".re-start-modal .closeBtn");
+        mismatch?.addEventListener("click", () => modal?.classList.remove("hidden"));
+        closeBtn?.addEventListener("click", () => modal?.classList.add("hidden"));
+      });
+    </script>
+  </body>
+</html>

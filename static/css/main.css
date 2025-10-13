@@ -1,0 +1,379 @@
+@font-face {
+  font-family: "HSSanTokki20-Regular";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2405@1.0/HSSanTokki20-Regular.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --app-max-w: 393px;
+  --status-h: 44px;
+  --apptop-h: 44px;
+  --cta-h: 88px;
+  --nav-h: 65px;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.box {
+  position: static;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: min(100vw, var(--app-max-w));
+  min-height: 100dvh;
+  margin: 0 auto;
+  background: #fff;
+  border : 1px solid #d9d9d9
+}
+
+.status-bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: var(--status-h);
+  padding: 0 25px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.status1 {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.status2 {
+  width: 18px;
+  height: 13px;
+  display: block;
+}
+
+.userLoc a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 4px;
+}
+
+.userLoc p {
+  color: #000;
+  font-size: 18px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.downIcn {
+  width: 20px;
+  height: 20px;
+}
+
+.app-top-bar {
+  position: sticky;
+  top: var(--status-h);
+  z-index: 49;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: var(--apptop-h);
+  padding: 0 15px;
+  background: #fff;
+}
+
+.basket-container {
+  position: relative;
+  display: inline-block;
+}
+
+.basket-count {
+  position: absolute;
+  right: -6px;
+  bottom: -1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  background: #545454;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 300;
+  border-radius: 50%;
+}
+
+.top-point {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.point img {
+  margin-top: 4px;
+  width: 24px;
+  height: auto;
+}
+
+.mypoint {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 61px;
+  height: 27px;
+  background: #f5f5f5;
+  border: 1px solid #d9d9d9;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.app-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 12px 0;
+  padding-bottom: calc(var(--nav-h) + env(safe-area-inset-bottom) + 12px);
+}
+
+#mainBoard {
+  margin: 0 25px;
+}
+
+.bannerSelect {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  gap: 24px;
+}
+
+#mart,
+#cafe,
+#trad {
+  display: flex;
+  min-width: 72px;
+  height: 29px;
+  padding: 7px 18px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 30px;
+  border: 2px solid #d9d9d9;
+  white-space: nowrap;
+}
+
+.bannerSelect p {
+  color: #d9d9d9;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.clickable {
+  border: 2px solid #d9d9d9;
+  transition: border-color 0.2s;
+}
+
+.clickable p {
+  color: #d9d9d9;
+  transition: color 0.2s;
+}
+
+.clickable.active {
+  border-color: #545454 !important;
+}
+
+.clickable.active p {
+  color: #545454;
+}
+
+#banner {
+  width: 100%;
+  min-height: 120px;
+  margin-top: 16px;
+  position: relative;
+  display: grid;
+  gap: 10px;
+}
+
+.banner-card img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 20px;
+  display: block;
+}
+
+#board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 28px;
+}
+
+.promoText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.title1 {
+  font-family: "HSSanTokki20-Regular";
+  font-size: 36px;
+  font-weight: 400;
+  color: #000;
+}
+
+.title2 p {
+  color: #545454;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.food-ingredient {
+  display: flex;
+  gap: 33px;
+  padding-top: 32px;
+}
+
+.food,
+.ingredient {
+  width: 155px;
+  height: 146px;
+  border-radius: 20px;
+  background: #f5f5f5;
+  position: relative;
+}
+
+.food-ingredient button:hover {
+  background: #d7e5b4;
+  cursor: pointer;
+}
+
+.food-ingredient button:hover svg path {
+  stroke: #545454 !important;
+}
+
+.food-ingredient svg {
+  position: absolute;
+  top: 27px;
+  left: 21px;
+}
+
+.food p,
+.ingredient p {
+  position: absolute;
+  right: 19px;
+  bottom: 29px;
+  color: #545454;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* 앱 자체 하단바 */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  z-index: 300;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 20px;
+  width: 393px;
+  height: 65px;
+  background: #f5f5f5;
+  border-top: 1px solid #d9d9d9;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bottom-nav-item img {
+  width: 24px;
+  height: auto;
+  color: black;
+}
+
+.bottom-nav-item-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #a5a5a5;
+}
+
+.modal {
+    position: absolute;
+    top: 0; right: 10;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.4); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+}
+.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: #fff;
+    border-radius: 20px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden; 
+    padding: 20px 20px 0 20px; 
+}
+
+
+.modal-icon {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.modal-text {
+    font-size: 18px;
+    font-weight: 600;
+    color: #e74c3c; 
+    margin-bottom: 20px;
+}
+
+.modal-btn {
+    display: block;
+    width: 300px;
+    padding: 14px 0;
+    border: none;
+    background: #D9D9D9;
+    font-size: 16px;
+    font-weight: bold;
+    color: #888;
+    cursor: pointer;
+    border-radius: 0 0 20px 20px; 
+
+
+    color: #FFF;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: normal;
+    }

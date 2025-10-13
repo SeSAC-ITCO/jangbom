@@ -1,0 +1,168 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/ingredient_result.css' %}" />
+    <title>재료 선택 완료</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box">
+        {% comment %} 상단바 {% endcomment %}
+        <div class="status-bar">
+          <p>19:20</p>
+          <div class="status1">
+            <img class="status2" src="{% static 'img/reception.svg' %}" alt="reception" />
+            <img class="status2" src="{% static 'img/wifi.svg' %}" alt="wifi" />
+            <img class="status2" src="{% static 'img/battery.svg' %}" alt="battery" />
+          </div>
+        </div>
+
+        {% comment %} 앱 자체 상단바 {% endcomment %}
+        <div class="app-top-bar">
+          <!-- 뒤로가기 -->
+          <a href="{% url 'food:ingredient_input' %}" aria-label="뒤로가기">
+            <img class="top-back" src="{% static 'img/chevron-left.svg' %}" alt="back" />
+          </a>
+          <div class="top-actions" style="display:flex;align-items:center;gap:12px;">
+            <a href="{% url 'food:cart_view' %}" class="basket-container">
+                {% if cart_items_count == 0 %}
+                    <img src="{% static 'img/basket.svg' %}" class="basket" alt="basket">
+                    <span class="basket-count">{{ cart_items_count }}</span>
+                {% else %}
+                    <img src="{% static 'img/basket.svg' %}" class="basket" alt="basket">
+                    <span class="basket-count">{{ cart_items_count }}</span>
+                {% endif %}
+            </a>
+            <div class="top-point" style="display:flex;align-items:center;gap:6px;">
+              <a href="{% url 'point:barcode' %}" class="top-barcode">
+                <img class="point" src="{% static 'img/lucide.svg' %}" alt="point" />
+              </a>
+              <p class="mypoint">{{ total_point }} P</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="choose-mat">
+          <h4 class="choose-title">재료 선택 완료</h4>
+          <p class="choose-title2">
+            장 보러 갈 준비 되었나요?<br />
+            각 재료를 클릭하면 활용법도 볼 수 있어요!
+          </p>
+        </div>
+
+        <div class="mat-block-set">
+          {% if shopping_list.shoppinglistingredient_set.exists %}
+            <div class="item-grid">
+              {% for item in shopping_list.shoppinglistingredient_set.all %}
+                <a class="item"
+                   href="{% url 'food:ingredient_idea_page' %}?name={{ item.ingredient.name|urlencode }}"
+                   aria-label="{{ item.ingredient.name }} 활용법 보기">
+                  {% if item.ingredient.image %}
+                    <img class="item-pic" src="{{ item.ingredient.image.url }}" alt="{{ item.ingredient.name }}" />
+                  {% else %}
+                    <div class="item-pic"
+                         aria-label="이미지 없음"
+                         style="display:flex;align-items:center;justify-content:center;background:#f4f4f4;color:#9e9e9e;">
+                      이미지 없음
+                    </div>
+                  {% endif %}
+                  <div class="item-name">
+                    {{ item.ingredient.name }}
+                    <img src="{% static 'img/chevron-right(green).svg' %}" alt="" />
+                  </div>
+                </a>
+
+                <form method="post"
+                      action="{% url 'food:delete_ingredient' item.ingredient.name %}"
+                      style="display:none;">
+                  {% csrf_token %}
+                  <input type="hidden" name="ingredient" value="{{ item.ingredient.name }}">
+                </form>
+              {% endfor %}
+            </div>
+          {% else %}
+            <div style="padding:16px 24px;color:#666;">장바구니에 담긴 재료가 없습니다.</div>
+          {% endif %}
+        </div>
+
+        <div class="start">
+          <a class="start-point" href="{% url 'market:edit_market_filter_ingredient' %}">
+            상점 필터 설정
+            <img src="{% static 'img/arrow-right-thick.svg' %}" alt="arrow-right" />
+          </a>
+
+          <form action="{% url 'market:nearest_market' %}" method="get">
+            <button type="submit" class="startBtn">장 보러 가기</button>
+          </form>
+        </div>
+
+        {% comment %} 앱 자체 하단바 {% endcomment %}
+        <div class="bottom-nav">
+          <a class="bottom-nav-item" href="{% url 'food:main' %}">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+            >
+              <path
+                d="M15 21V13C15 12.7348 14.8946 12.4805 14.7071 12.2929C14.5196 12.1054 14.2652 12 14 12H10C9.73478 12 9.48043 12.1054 9.29289 12.2929C9.10536 12.4805 9 12.7348 9 13V21M3 10C2.99993 9.7091 3.06333 9.42165 3.18579 9.15775C3.30824 8.89384 3.4868 8.65983 3.709 8.47203L10.709 2.47303C11.07 2.16794 11.5274 2.00055 12 2.00055C12.4726 2.00055 12.93 2.16794 13.291 2.47303L20.291 8.47203C20.5132 8.65983 20.6918 8.89384 20.8142 9.15775C20.9367 9.42165 21.0001 9.7091 21 10V19C21 19.5305 20.7893 20.0392 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0392 3 19.5305 3 19V10Z"
+                stroke="#A5A5A5"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span class="bottom-nav-item-title">홈</span>
+          </a>
+          <a class="bottom-nav-item" href="{% url 'accounts:activity_log' %}">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+            >
+              <path
+                d="M15.9999 17H19.9999M3.99991 13H7.99991M3.99991 16V13.62C3.99991 11.5 2.96991 10.5 2.99991 8C3.02991 5.28 4.48991 2 7.49991 2C9.36991 2 9.99991 3.8 9.99991 5.5C9.99991 8.61 7.99991 11.16 7.99991 14.18V16C7.99991 16.5304 7.7892 17.0391 7.41412 17.4142C7.03905 17.7893 6.53034 18 5.99991 18C5.46948 18 4.96077 17.7893 4.5857 17.4142C4.21062 17.0391 3.99991 16.5304 3.99991 16ZM19.9999 20V17.62C19.9999 15.5 21.0299 14.5 20.9999 12C20.9699 9.28 19.5099 6 16.4999 6C14.6299 6 13.9999 7.8 13.9999 9.5C13.9999 12.61 15.9999 15.16 15.9999 18.18V20C15.9999 20.5304 16.2106 21.0391 16.5857 21.4142C16.9608 21.7893 17.4695 22 17.9999 22C18.5303 22 19.0391 21.7893 19.4141 21.4142C19.7892 21.0391 19.9999 20.5304 19.9999 20Z"
+                stroke="#000000"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span class="bottom-nav-item-title" style="color:black">내 활동</span>
+          </a>
+          <a class="bottom-nav-item" href="{% url 'point:point_home' %}">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+            >
+              <path
+                d="M9 17V7H13C13.7956 7 14.5587 7.31607 15.1213 7.87868C15.6839 8.44129 16 9.20435 16 10C16 10.7956 15.6839 11.5587 15.1213 12.1213C14.5587 12.6839 13.7956 13 13 13H9M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z"
+                stroke="#A5A5A5"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span class="bottom-nav-item-title">포인트</span>
+          </a>
+        </div>
+
+
+          <ul class="django-messages" aria-live="polite">
+            {% for message in messages %}
+              <li class="django-message">{{ message }}</li>
+            {% endfor %}
+          </ul>
+
+      </div>
+    </div>
+  </body>
+</html>

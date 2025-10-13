@@ -1,0 +1,225 @@
+* {
+    font-family: 'Pretendard';
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    text-decoration: none;
+    background: none; 
+}
+
+#Container{
+    position: relative;
+    width: 393px;
+    height: 852px;
+    margin: 0 auto;
+    border: 1px solid var(--Gray-Primary, #d9d9d9);
+}
+
+/* 상단 바 */
+#pointBar{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 12px;
+}
+
+
+
+
+
+/* 메인 보드 */
+#mainBoard {
+    margin: 0 25px;
+    height: 600px;
+
+    /* 스크롤 설정 */
+    overflow-y: auto;    /* 세로 스크롤만 가능 */
+    overflow-x: hidden;  /* 가로 스크롤 숨김 */
+
+    /* 스크롤바 숨기기 (웹킷 기반 브라우저) */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+}
+
+#mainBoard::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
+}
+
+
+.mainMent{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 40px;
+}
+
+.mainMent p{
+    color: #545454;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: normal;
+}
+
+
+
+
+
+
+
+/* 메인 gpt 대화 부분 */
+.chatBoard {
+    display: flex;
+    flex-direction: column; /* 세로로 메시지 쌓기 */
+    gap:10px;
+}
+
+.userMsg {
+    display: inline-block;
+    max-width: 70%; 
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin: 10px 0;
+    background: #F5F5F5;
+
+    align-self: flex-end;  /* 부모 flex 기준 오른쪽 끝으로 이동 */
+    text-align: right; 
+
+    word-wrap: break-word;     /* 긴 단어라도 줄바꿈 */
+    overflow-wrap: break-word; /* 호환용 */
+    white-space: normal;
+}
+
+.userMsg p{
+    color: #545454;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.gptMsg {
+    display: inline-block;
+    width:316px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin: 10px 0;
+    background: #F5F5F5;
+
+    align-items: flex-start;  /* 부모 flex 기준 오른쪽 끝으로 이동 */
+    text-align: left; 
+
+    word-wrap: break-word;     /* 긴 단어라도 줄바꿈 */
+    overflow-wrap: break-word; /* 호환용 */
+    white-space: normal;
+    background: #F5F5F5;
+}
+
+.gptMsg p{
+    color: #545454;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: normal;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* gpt 부분 */
+
+#gptBox{
+    display: flex;
+    padding: 13px 13px 12px 21px;
+    align-items: center;
+    border-radius: 20px;
+    border: 1px solid #D9D9D9;
+    background: #FFF;
+    position: absolute;
+    bottom: 20px;
+    left: 24px;
+    width: 346px;
+    transition: transform 0.3s ease;
+}
+
+.inputBar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap:5px;
+    justify-content: space-between;
+}
+.gptInput{
+    width:100%
+}
+.gptInput::placeholder {
+    color: #D9D9D9;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: normal;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* input이 입력될 떄 키보드 생성 */
+/* 기본 상태는 키보드 이미지 숨김 */
+
+
+/* 키보드 이미지 */
+.keyboard-icon {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 393px;
+    height: 305px;
+    display: none;
+    z-index: 1000;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+
+#gptBox.up {
+    bottom: 320px; /* 키보드 높이(305px) + 여유(20px) 만큼 올림 */
+    z-index: 1001;
+}
+
+
+

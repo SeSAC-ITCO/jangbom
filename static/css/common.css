@@ -1,0 +1,39 @@
+button,
+a {
+  cursor: pointer;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+#root {
+  width: 100%;
+}
+
+.container {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; */
+  position: relative;
+  width: 393px;
+  height: 852px;
+  margin: 0 auto;
+  background-color: white;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.none {
+  display: none !important;
+}
+
+input {
+  outline: none;
+}

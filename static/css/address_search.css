@@ -1,0 +1,342 @@
+
+:root {
+  --app-max-w: 393px;
+  --status-h: 44px;
+  --apptop-h: 44px;
+  --apptitle-h: 50px;
+  --cta-h: 88px;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  min-height: 100dvh;
+  background: #efefef;
+}
+
+.box {
+  position: static !important;
+  width: min(100vw, var(--app-max-w));
+  min-height: 100dvh;
+  margin: 0 auto;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* overflow: hidden; */
+  overflow: visible;
+    border : 1px solid #d9d9d9
+
+}
+
+.status-bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: var(--status-h);
+  padding: 0 25px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.status1 {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.status2 img {
+  width: 18px;
+  height: 13px;
+}
+
+.app-top-bar {
+  position: sticky;
+  top: var(--status-h);
+  z-index: 49;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: var(--apptop-h);
+  padding: 0 15px;
+}
+
+.top-back img {
+  width: 24px;
+  height: auto;
+}
+
+.top-point {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ============ 페이지 전용 변수 ============ */
+:root {
+  --sheet-h: 240px; /* 하단 바텀시트 높이 */
+}
+
+.app-title {
+  margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #545454;
+  letter-spacing: 0.5px;
+  pointer-events: none;
+}
+
+.address-search {
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  position: sticky;
+  top: calc(var(--status-h) + var(--apptop-h));
+  z-index: 999;
+  background: #fff;
+  padding: 8px 20px 12px;
+}
+
+/* sticky 박스 안 요소 정렬 유지(센터 정렬 유지하려면 그대로) */
+.address-search .app-title{
+  margin: 0 0 10px;            /* 좌우 마진 0, 아래쪽만 10px */
+}
+
+/* (선택) 고정 영역 아래 그레이 배경과 자연스럽게 이어지도록 */
+.search-result{ margin-top: 0; }
+
+.fixed-address {
+  padding: 16px 20px;
+}
+
+.search-result {
+  margin-top: 8px;
+}
+
+/* ==== 검색창 ==== */
+.addr-inputbar{
+  width: 321px;
+  height: 39px;
+  box-sizing: border-box;
+  margin: 0 0 10px;
+}
+
+.addr-input{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 5px 8px 5px 12px;
+  box-sizing: border-box;
+  border-radius: 20px;
+  background: #F5F5F5;
+}
+
+.addr-input input[type="text"]{
+  flex: 1;
+  min-width: 0;                 /* 긴 텍스트에서 줄바꿈/수축 허용 */
+  border: 0;
+  outline: none;
+  font-size: 15px;
+  background: transparent;
+}
+
+.addr-input:focus-within{
+  border-color: #bdbdbd;
+  box-shadow: 0 0 0 3px rgba(0,0,0,.04);
+}
+
+.addr-send{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 999px;
+  background: #f2f2f2;         /* 필요 시 transparent */
+  cursor: pointer;
+}
+.addr-send img{
+  width: 20px;
+  height: 20px;
+  opacity: .85;
+}
+/* .addr-send:active{
+  transform: scale(.98);
+} */
+
+/* ==== 검색 결과 섹션 (회색 배경을 컨테이너 폭 안에서 하단 끝까지) ==== */
+.search-result {
+  width: 393px;
+  border-top: 1px solid #d9d9d9;
+  position: relative;
+  background: #f5f5f5;
+  z-index: 0;
+  margin-top: 15px;
+}
+
+.search-result > span {
+  display: block;
+  padding: 14px 20px;
+  font-weight: 600;
+  color: #545454;
+  background: transparent;
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+/* 폭은 .search-result(=393px)에 고정, 아래로만 넉넉히 확장 */
+.search-result::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 -30vmax 0;
+  background: #f5f5f5;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@media (max-width: 360px) {
+  .input-row {
+    height: 44px;
+  }
+  .input-mat {
+    line-height: 44px;
+  }
+}
+
+.search-result::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: -120vh;
+  background: #f5f5f5;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ==== 리스트 카드 ==== */
+.search-result-list ul{
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* 각 항목은 "카드" 1장 */
+.result-item{ width: 100%; }
+
+.result-form{
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  padding: 12px;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+/* 왼쪽 핀 */
+.result-pin{
+  width: 24px;
+  height: 24px;
+  margin-top: 3px;             /* 텍스트 상단 기준 맞춤 */
+  flex-shrink: 0;
+  opacity: .8;
+}
+
+/* 본문(세로 스택) */
+.address-result{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;                /* 긴 문자열 줄바꿈 허용 */
+}
+
+.result-title{
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #444;
+  line-height: 1.35;
+  word-break: keep-all;
+}
+
+.address-detail{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.field-label{
+  flex: 0 0 auto;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.field-input{
+  min-width: 0;
+  height: 30px;
+  padding: 6px 10px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 14px;
+  outline: none;
+}
+.field-input:focus{
+  border-color: #bdbdbd;
+  box-shadow: 0 0 0 2px rgba(0,0,0,.03);
+}
+
+.result-sub{
+  font-size: 12px;
+  color: #9ca3af;
+  line-height: 1.2;
+  word-break: keep-all;
+}
+
+/* 우측 이동 버튼 */
+.result-go{
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* width: 36px;
+  height: 36px; */
+  margin-top: 2px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.result-go img{
+  width: 18px;
+  height: 18px;
+  opacity: .8;
+}
+
+/* 빈 결과 */
+.result-item.empty{
+  padding: 16px;
+  color: #6b7280;
+}

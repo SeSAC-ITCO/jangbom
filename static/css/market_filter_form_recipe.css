@@ -1,0 +1,137 @@
+* {
+    font-family: 'Pretendard';
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    text-decoration: none;
+    cursor: default;
+    caret-color: transparent;
+}
+
+#Container{
+    position: relative;
+    width: 393px;
+    height: 852px;
+    margin: 0 auto;
+    border: 1px solid var(--Gray-Primary, #d9d9d9);
+}
+
+/* 상단 바 */
+#pointBar{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    margin-left: 10px;
+}
+
+
+
+/* 멘트부분 */
+.mainMent{
+    margin-top : 12px ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.mainMent p{
+    color: #545454;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: normal;
+}
+
+
+/* 메인 보드 */
+
+#mainBoard{
+    padding: 0 48px;
+}
+#mainBoard * {
+user-select: none;
+}
+
+.subTitle{
+    color: #A5A5A5;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: normal;
+    margin-top: 30px;
+}
+
+
+
+
+/* 체크박스 숨기기 */
+label input[type="checkbox"] {
+    display: none;
+}
+
+/* 커스텀 체크박스 만들기 */
+label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 글자와 체크박스 분리 */
+    padding: 14px 8px;
+    border-bottom: 1px solid #E0E0E0; /* 각 항목 구분선 */
+    cursor: pointer;
+    color: #545454;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: normal;
+}
+
+
+label span {
+    width: 24px;
+    height: 24px;
+    border: 1px solid #000;
+    display: inline-block;
+    border-radius: 4px; /* 사각 모서리 */
+    transition: background 0.2s, border-color 0.2s;
+    position: relative;
+}
+
+/* 체크되었을 때 체크 표시 */
+label input[type="checkbox"]:checked + span::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 7px;
+    width: 6px;
+    height: 12px;
+    border: 1px solid #000;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+
+
+/* 저장하기 버튼 */
+button{
+    position: absolute;
+    bottom: 102px;
+    left: 61px;
+
+    display: flex;
+    width: 271px;
+    height: 53px;
+    padding: 14px 0;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 15px;
+    background: #BEDA78;
+
+    color: #FFF;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: normal;
+}

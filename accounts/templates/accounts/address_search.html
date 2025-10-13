@@ -1,0 +1,144 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/address_search.css' %}" />
+    <title>주소 검색</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box">
+        {% comment %} 상단바 {% endcomment %}
+        <div class="status-bar">
+          <p>19:20</p>
+          <div class="status1">
+            <img
+              class="status2"
+              src="{% static 'img/reception.svg' %}"
+              alt="reception"
+            />
+            <img class="status2" src="{% static 'img/wifi.svg' %}" alt="wifi" />
+            <img
+              class="status2"
+              src="{% static 'img/battery.svg' %}"
+              alt="battery"
+            />
+          </div>
+        </div>
+
+        {% comment %} 앱 자체 상단바 {% endcomment %}
+        <div class="app-top-bar">
+          <a
+            href="{% url 'accounts:address_settings' %}"
+            class="top-back-link"
+            aria-label="뒤로 가기"
+          >
+            <img
+              class="top-back"
+              src="{% static 'img/chevron-left(gray).svg' %}"
+              alt="뒤로 가기"
+            />
+          </a>
+        </div>
+
+        <div class="address-search">
+          <h2 class="app-title">주소 검색</h2>
+
+          <div class="addr-inputbar">
+            <form
+              method="get"
+              action="{% url 'accounts:address_search' %}"
+              class="addr-input"
+              role="search"
+            >
+              <button type="submit" class="addr-send" aria-label="검색">
+                <img src="{% static 'img/search.svg' %}" alt="검색" />
+              </button>
+
+              <input
+                id="q"
+                name="q"
+                type="text"
+                placeholder="지번, 도로명, 건물명으로 검색"
+                autocomplete="off"
+                aria-label="주소 검색 입력"
+                value="{{ q|default_if_none:'' }}"
+              />
+            </form>
+          </div>
+        </div>
+
+        {% if q %}
+        <div class="search-result">
+          <span>“{{ q }}” 검색 결과</span>
+
+          <div class="search-result-list">
+            <ul>
+              {% for r in results %}
+              <li
+                class="result-item"
+                tabindex="0"
+                role="button"
+                aria-label="{{ r.name }} 선택"
+              >
+                <form
+                  method="post"
+                  action="{% url 'accounts:address_save' %}"
+                  class="result-form"
+                >
+                  {% csrf_token %}
+                  <img
+                    class="result-pin"
+                    src="{% static 'img/map-pin(gray).svg' %}"
+                    alt=""
+                    aria-hidden="true"
+                  />
+
+                  <div class="address-result">
+                    <p class="result-title">{{ r.name }}</p>
+                    <small class="result-sub"
+                      >{{ r.l1 }} {{ r.l2 }} {{ r.l3 }}</small
+                    >
+
+                    <div class="address-detail">
+                      <label
+                        for="detail-{{ forloop.counter }}"
+                        class="field-label"
+                        >상세 주소</label
+                      >
+                      <input
+                        id="detail-{{ forloop.counter }}"
+                        name="detail"
+                        class="field-input"
+                        type="text"
+                        placeholder="동·호수, 층 등"
+                        autocomplete="address-line2"
+                        inputmode="text"
+                        maxlength="50"
+                      />
+                    </div>
+                  </div>
+
+                  <input type="hidden" name="name" value="{{ r.name }}" />
+                  <input type="hidden" name="l1" value="{{ r.l1 }}" />
+                  <input type="hidden" name="l2" value="{{ r.l2 }}" />
+                  <input type="hidden" name="l3" value="{{ r.l3 }}" />
+                  <input type="hidden" name="lat" value="{{ r.lat }}" />
+                  <input type="hidden" name="lng" value="{{ r.lng }}" />
+                </form>
+              </li>
+              {% empty %}
+              <li class="result-item empty">검색 결과가 없습니다.</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    <script src="{% static 'js/address_search.js' %}" defer></script>
+  </body>
+</html>

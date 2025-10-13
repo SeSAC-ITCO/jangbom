@@ -1,0 +1,394 @@
+:root {
+  --app-max-w: 393px;
+  --status-h: 44px;
+  --apptop-h: 44px;
+  --apptitle-h: 50px;
+  --cta-h: 88px;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  min-height: 100dvh;
+  background: #fff;
+}
+
+.box {
+  position: static !important;
+  width: min(100vw, var(--app-max-w));
+  min-height: 100dvh;
+  margin: 0 auto;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* overflow: hidden; */
+  overflow: visible;
+    border : 1px solid #d9d9d9
+
+}
+
+.status-bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: var(--status-h);
+  padding: 0 25px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.status1 {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.status2 img {
+  width: 18px;
+  height: 13px;
+}
+
+.app-top-bar {
+  position: sticky;
+  top: var(--status-h);
+  z-index: 49;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: var(--apptop-h);
+  padding: 0 15px;
+}
+
+.top-back img {
+  width: 24px;
+  height: auto;
+}
+
+.top-point {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ============ 페이지 전용 변수 ============ */
+:root {
+  --sheet-h: 240px; /* 하단 바텀시트 높이 */
+}
+
+/* 상단 제목 */
+.app-title {
+  color: #545454;
+  background-color: #fff;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.48px;
+  position: sticky;
+  top: calc(var(--status-h) + var(--apptop-h));
+  z-index: 48;
+  height: var(--apptitle-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 15px;
+}
+
+/* ============ 지도 영역 ============ */
+.address-pick-map {
+  width: 100%;
+}
+
+/* 지도 래퍼: 남는 높이는 바텀시트만큼 빼서 계산 */
+.map-wrap {
+  margin: 0 auto;
+  background: #e5e7eb;
+}
+
+/* 정적 지도 이미지가 영역을 가득 채우도록 */
+.map-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 비율 유지하며 꽉 채우기 */
+}
+
+/* (동적 지도로 바꿀 때를 대비한 선택자 - 지금은 사용 안 해도 무방) */
+.map {
+  position: absolute;
+  inset: 0;
+}
+
+/* 중앙 고정 핀 */
+.center-pin {
+  position: absolute;
+  left: 50%;
+  top: 35%;
+  transform: translate(-50%, -80%); /* 핀 끝이 중앙에 오도록 오프셋 */
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
+}
+
+.btn-locate {
+  position: absolute;
+  right: 12px;
+  bottom: 250px;
+  z-index: 60;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.btn-locate img {
+  width: 20px;
+  height: 20px;
+}
+
+/* ============ 하단 모달(바텀시트) ============ */
+.address-pick-modal {
+  position: sticky; /* 스크롤 친화적 고정 */
+  margin-top: 8px;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 393px;
+  padding: 16px;
+  background: #fff;
+  border-radius: 15px 15px 0 0;
+  box-shadow: 0px -5px 4px 0px rgba(0, 0, 0, 0.04);
+  z-index: 200;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
+}
+
+.address-pick-modal .modal-content {
+  padding: 5px 20px 20px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  /* iOS 안전 영역 */
+  padding-bottom: max(20px, env(safe-area-inset-bottom));
+}
+
+.modal-title {
+  margin: 0;
+  color: #545454;
+  line-height: 1.4;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* 상세주소 라벨 + 인풋 (가로 배치, 짧은 폭) */
+.address-detail {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+  color: #a5a5a5;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* 라벨 텍스트 (p 또는 label 모두 지원) */
+/* .address-detail p,
+.field-label {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
+  white-space: nowrap;
+} */
+
+/* 인풋 스타일 (input 또는 .field-input 모두 대응) */
+.address-detail input,
+.field-input {
+  width: 175px; /* 필요 시 160~200px로 조절 */
+  height: 30px;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  padding: 0 10px;
+  font-size: 15px;
+  background: #fff;
+  outline: none;
+}
+.address-detail input::placeholder,
+.field-input::placeholder {
+  color: #9aa0a6;
+}
+.address-detail input:focus,
+.field-input:focus {
+  border-color: #cbd5e1;
+  box-shadow: 0 0 0 2px rgba(203, 213, 225, 0.35);
+}
+
+/* 경고 라인 */
+.check-alert {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #dc3f5c;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 400;
+  margin-top: 10px;
+}
+.check-alert img {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+}
+.check-alert p {
+  margin: 0;
+}
+
+/* 버튼 */
+.modal-buttons {
+  margin-top: 10px;
+}
+.renavigationBtn {
+  width: 336px;
+  height: 36px;
+  border: 0;
+  border-radius: 16px;
+  background: #beda78;
+  font-weight: 600;
+  font-size: 15px;
+  color: #fff;
+  margin-top: 5px;
+}
+.renavigationBtn:active {
+  transform: translateY(1px);
+}
+.renavigationBtn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(171, 220, 79, 0.45);
+}
+
+/* 소형 기기 최적화 */
+@media (max-width: 360px) {
+  :root {
+    --sheet-h: 220px;
+  }
+  .address-detail input,
+  .field-input {
+    width: 160px;
+  }
+}
+
+/* 지도 위 플로팅 버튼 – 모달(바텀시트) 바로 위에 항상 고정 */
+.btn-locate {
+  position: fixed;
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  /* 오른쪽: 가운데 정렬된 .box 안쪽에 맞추기 */
+  right: max(12px, calc((100vw - var(--app-max-w)) / 2 + 12px));
+
+  /* 아래: 바텀시트 높이(+안전영역)만큼 위로 띄우기 */
+  bottom: calc(var(--sheet-h));
+}
+
+/* 필요하면 여백 미세 조정 변수(선택) */
+:root {
+  --sheet-h: 240px; /* 바텀시트 높이(이미 쓰는 값) */
+  --app-max-w: 393px; /* 앱 최대 폭(이미 정의돼 있으면 생략) */
+}
+
+/* === 현재 위치 GPS 핀 === */
+.center-pin.custom-gps {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #3b82f6;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.35);
+  pointer-events: none;
+}
+
+.center-pin.custom-gps .pulse {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: gpsPulse 1.6s ease-out infinite;
+  background: rgba(59, 130, 246, 0.35);
+  pointer-events: none;
+}
+
+@keyframes gpsPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.6);
+    opacity: 0;
+  }
+}
+
+/* 중앙 고정핀은 그대로 클릭 막기 */
+.center-pin {
+  pointer-events: none;
+}
+
+/* 맵이 화면 가득 차도록 */
+.address-pick-map .map-wrap {
+  height: calc(100vh - var(--status-h) - var(--apptop-h));
+  overflow: hidden;
+}
+
+/* 중앙 고정핀/현재위치 버튼 레이어는 유지 */
+.address-pick-map .map-wrap > .center-pin {
+  position: absolute;
+  left: 50%;
+  top: 35%;
+  transform: translate(-50%, -80%);
+  width: 24px;
+  height: 24px;
+  z-index: 50;
+  pointer-events: none;
+}
+.address-pick-map .map-wrap > .btn-locate {
+  position: absolute;
+  right: 12px;
+  bottom: 270px;
+  z-index: 60;
+}

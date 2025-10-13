@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/recipe_ingredients_search.css' %}" />
+    <title>재료 직접 담기</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box">
+        {% comment %} 상단바 {% endcomment %}
+        <div class="status-bar">
+          <p>19:20</p>
+          <div class="status1">
+            <img class="status2" src="{% static 'img/reception.svg' %}" alt="reception" />
+            <img class="status2" src="{% static 'img/wifi.svg' %}" alt="wifi" />
+            <img class="status2" src="{% static 'img/battery.svg' %}" alt="battery" />
+          </div>
+        </div>
+
+        {% comment %} 앱 자체 상단바 {% endcomment %}
+        <div class="app-top-bar">
+          <a href="{% url 'food:main' %}" aria-label="닫기">
+            <img class="top-back" src="{% static 'img/chevron-x.svg' %}" alt="close" />
+          </a>
+        </div>
+
+        <h3 class="add-mat-title">재료 직접 담기</h3>
+        <p>따로 구매할 재료가 있다면 직접 추가해보세요!</p>
+
+        <div class="ah_search">
+          <form class="input-row" method="get" action="{% url 'food:ingredient_input' %}">
+            <textarea class="input-rec" name="search" placeholder=" " rows="1">{{ search_query|default:'' }}</textarea>
+            <button class="input-rec-search" type="submit" name="action" value="search" aria-label="검색">
+              <img src="{% static 'img/search.svg' %}" alt="확인" />
+            </button>
+          </form>
+        </div>
+
+        {% if category_ingredients %}
+          <ul class="search-result-list">
+            {% for ing in category_ingredients %}
+              <li class="search-result-item">
+                <form method="post" action="{% url 'food:add_ingredient' %}">
+                  {% csrf_token %}
+                  <input type="hidden" name="search" value="{{ search_query|default:'' }}">
+                  <label class="result-label">
+                    <input type="checkbox" name="ingredient" value="{{ ing.name }}" onchange="this.form.submit()">
+                    <span class="result-name">{{ ing.name }}</span>
+                  </label>
+                </form>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        <div
+          class="toast"
+          id="noResultToast"
+          aria-live="polite"
+          aria-hidden="true"
+          data-has-query="{% if search_query %}1{% else %}0{% endif %}"
+          data-has-results="{% if category_ingredients %}1{% else %}0{% endif %}"
+        >
+          해당되는 검색어가 없습니다
+        </div>
+
+        <section class="recent-search">
+          <div class="recent-search-head">
+            <h4>최근 검색어</h4>
+            {% if recent_searches %}
+              <a class="recent-clear" href="{% url 'food:clear_recent_ingredient' %}">전체삭제</a>
+            {% endif %}
+          </div>
+
+          <div class="recent-chips">
+            {% if recent_searches %}
+              {% for word in recent_searches %}
+                <span class="chip">
+                  <a class="chip-label" href="{% url 'food:ingredient_input' %}?search={{ word|urlencode }}">{{ word }}</a>
+                  <a class="chip-x" href="{% url 'food:delete_recent_ingredient' word %}" aria-label="{{ word }} 삭제">×</a>
+                </span>
+              {% endfor %}
+            {% else %}
+              <span class="recent-empty">최근 검색어가 없습니다.</span>
+            {% endif %}
+          </div>
+        </section>
+
+        <section class="selected-section">
+          <h4 class="selected-title">담은 재료</h4>
+          <ul class="selected-list">
+            {% for ing in selected_ingredients %}
+              <li class="selected-item">
+                <form method="post" action="{% url 'food:delete_ingredient' ing.name %}">
+                  {% csrf_token %}
+                  <input type="hidden" name="search" value="{{ search_query|default:'' }}">
+                  <button type="submit" class="chip selected-remove-btn" aria-label="{{ ing.name }} 삭제">
+                    <span class="chip-label">{{ ing.name }}</span>
+                    <span class="chip-x" aria-hidden="true">×</span>
+                  </button>
+                </form>
+              </li>
+            {% empty %}
+              <li class="selected-empty">장바구니에 담긴 재료가 없습니다.</li>
+            {% endfor %}
+          </ul>
+        </section>
+
+        <div class="add-mat">
+          <div class="add-mat-item">
+            <a class="add-item-done" href="{% url 'food:ingredient_result' %}">완료</a>
+          </div>
+        </div>
+
+        <div class="dialpad hidden" id="dialpad">
+          <img src="{% static 'img/iOS-Keypad.svg' %}" alt="dialpad" />
+        </div>
+      </div>
+    </div>
+    <script src="{% static 'js/recipe_ingredients_search.js' %}" defer></script>
+  </body>
+</html>
