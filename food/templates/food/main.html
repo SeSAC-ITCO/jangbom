@@ -10,24 +10,36 @@
     <script src="{% static 'js/main.js' %}" defer></script>
   </head>
   <body>
-  {% if user.is_authenticated %}
-  <div class="container">
-    <!-- 주소 미설정 모달 -->
-    {% if not user.address %}
-    <div class="modal hidden">
-      <div class="modal-content">
-        <div class="modal-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-                            <path d="M16 12V17.3333M16 22.6666H16.0133M28.9733 24L18.3067 5.33331C18.0741 4.92291 17.7368 4.58156 17.3292 4.34407C16.9217 4.10657 16.4584 3.98145 15.9867 3.98145C15.5149 3.98145 15.0517 4.10657 14.6441 4.34407C14.2365 4.58156 13.8992 4.92291 13.6667 5.33331L3 24C2.76491 24.4071 2.64164 24.8692 2.64268 25.3393C2.64372 25.8095 2.76903 26.271 3.00593 26.6771C3.24282 27.0832 3.58286 27.4194 3.99159 27.6517C4.40032 27.8841 4.86321 28.0042 5.33333 28H26.6667C27.1345 27.9995 27.594 27.8759 27.999 27.6417C28.404 27.4074 28.7403 27.0708 28.974 26.6655C29.2077 26.2602 29.3307 25.8005 29.3306 25.3326C29.3305 24.8648 29.2073 24.4052 28.9733 24Z" stroke="#D9D9D9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>        </div>
-        <div class="modal-text">주소 설정 후 이용해주세요</div>
-        <a href="{% url 'accounts:address_settings' %}">
-          <button class="modal-btn">주소 설정하기</button>
-        </a>
+    {% if user.is_authenticated %}
+    <div class="container">
+      <!-- 주소 미설정 모달 -->
+      {% if not user.address %}
+      <div class="modal hidden">
+        <div class="modal-content">
+          <div class="modal-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+            >
+              <path
+                d="M16 12V17.3333M16 22.6666H16.0133M28.9733 24L18.3067 5.33331C18.0741 4.92291 17.7368 4.58156 17.3292 4.34407C16.9217 4.10657 16.4584 3.98145 15.9867 3.98145C15.5149 3.98145 15.0517 4.10657 14.6441 4.34407C14.2365 4.58156 13.8992 4.92291 13.6667 5.33331L3 24C2.76491 24.4071 2.64164 24.8692 2.64268 25.3393C2.64372 25.8095 2.76903 26.271 3.00593 26.6771C3.24282 27.0832 3.58286 27.4194 3.99159 27.6517C4.40032 27.8841 4.86321 28.0042 5.33333 28H26.6667C27.1345 27.9995 27.594 27.8759 27.999 27.6417C28.404 27.4074 28.7403 27.0708 28.974 26.6655C29.2077 26.2602 29.3307 25.8005 29.3306 25.3326C29.3305 24.8648 29.2073 24.4052 28.9733 24Z"
+                stroke="#D9D9D9"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+          <div class="modal-text">주소 설정 후 이용해주세요</div>
+          <a href="{% url 'accounts:address_settings' %}">
+            <button class="modal-btn">주소 설정하기</button>
+          </a>
+        </div>
       </div>
-    </div>
-    {% endif %}
-
+      {% endif %}
 
       <div class="box">
         <!-- 상단 상태바 -->
@@ -56,7 +68,7 @@
               aria-label="주소 설정"
             >
               {% if user.address == None %}
-                <p>주소를 설정해주세요</p>
+              <p>주소를 설정해주세요</p>
               {% else %}
               <p>{{ user.addr_level3 }}</p>
               <img
@@ -158,7 +170,9 @@
               <div class="promoText">
                 <div class="title1">장봄</div>
                 <div class="title2">
-                  <p> {{ user.addr_level3|default:"" }} {{ user.nickname }}님, </p>
+                  <p>
+                    {{ user.addr_level3|default:"" }} {{ user.nickname }}님,
+                  </p>
                   <p>한 끼를 위한 산책을 시작해요!</p>
                 </div>
               </div>
