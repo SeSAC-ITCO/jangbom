@@ -240,3 +240,15 @@ input[type="checkbox"]:checked + .ingredient-btn {
     font-size: 16px;
     font-weight: 500;
 }
+
+/* ----수정 */
+
+.empty-log {
+    margin-top: 16px;
+    padding-left: 16px;
+    color: #d9d9d9;
+    text-align: center;
+    font-size: 17px !important;
+    font-style: normal;
+    font-weight: 600;
+}
