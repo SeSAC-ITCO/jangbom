@@ -1,239 +1,259 @@
+/* 리셋 & 기본 */
 * {
-    font-family: 'Pretendard';
-    font-style: normal;
-    margin: 0;
-    padding: 0;
-    border: none;
-    outline: none;
-    box-sizing: border-box;
-    text-decoration: none;
-    background: none; 
-    caret-color: transparent;
+  font-family: "Pretendard", system-ui, -apple-system, Segoe UI, Roboto,
+    sans-serif;
+  font-style: normal;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  text-decoration: none;
+  background: none;
+  caret-color: transparent;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  background: #f2f2f2;
+  overflow: hidden; /* 전체 문서 스크롤 방지 (가운데만 스크롤) */
 }
 
-#Container{
-    position: relative;
-    width: 393px;
-    height: 852px;
-    margin: 0 auto;
-    border: 1px solid var(--Gray-Primary, #d9d9d9);
+/* 앱 캔버스(중앙 고정 폭) */
+#Container {
+  position: relative;
+  width: 393px;
+  height: 852px;
+  margin: 0 auto;
+  border: 1px solid var(--Gray-Primary, #d9d9d9);
+  background: #fff;
 }
+
+/* 장바구니 뱃지 */
 .basket-container {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
-
 .basket-count {
-    position: absolute;
-    bottom: -1px;  /* 아래쪽으로 */
-    right: -6px;   /* 오른쪽으로 */
-    background: #545454;
-    color: #FFFFFF;
-    font-size: 10px;
-    font-weight: 300;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: absolute;
+  bottom: -1px;
+  right: -6px;
+  background: #545454;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 300;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* 상단 바 */
-#pointBar{
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 12px;
+/* ===== 상단 고정 영역 ===== */
+#statusBar,
+#pointBar {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 393px; /* 컨테이너와 동일 */
+  z-index: 100;
+  background: #fff;
 }
 
-.userBar{
-    display: inline-flex;
-    padding: 0 15px;
-    justify-content: center;
-    align-items: center;
-    /* border: 1px solid #ccc; */
-    gap: 5px;
+/* StatusBar 이미지 높이는 상황에 맞게 조정 */
+#statusBar {
+  top: 0;
+  height: 30px;
+  object-fit: cover;
+  display: block;
 }
 
-.pointNum{
-    display: inline-block;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border-radius: 20px;
-    background: #F5F5F5;
-    padding: 5px 17px;
-    max-width: 120px;    
+/* 네비게이션/포인트 바 */
+#pointBar {
+  top: 30px; /* statusBar 바로 아래 */
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
 }
 
+.userBar {
+  display: inline-flex;
+  padding: 0 15px;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.pointNum {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 20px;
+  background: #f5f5f5;
+  padding: 5px 12px;
+  max-width: 120px;
+}
 .pointNum p {
-    color: #545454;
-    text-align: center;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: normal;
-    white-space: nowrap;
-    max-width: 120px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  color: #545454;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.mainMent{
-    padding: 12px 61px;
-    padding-top: 0;
-    gap: 8px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    white-space: nowrap;
-    width: 100%;
-}
-.text1{
-    color: #545454;
-    text-align: center;
-    font-size: 24px;
-    font-weight: 700;
-    line-height: normal;
-}
-.text2{
-    color: #000;
-    text-align: center;
-    font-size: 16px;
-    font-weight: 300;
-    line-height: normal;
-    white-space: nowrap;
-}
-
-
-/* 메인 보드 */
-#mainBoard{
-    background: #F5F5F5;
-    display: flex;
-    flex-direction: column;
-    padding: 0 35px 16px 35px;         /* Container 내에서 남는 공간을 채우도록 */
-    position: absolute;
-    bottom: 66px;
-    left: 0;
-    right: 0;
-    top: 195px;
-    overflow-y: auto;
-
-    scrollbar-width: none;       /* Firefox */
-    -ms-overflow-style: none; 
-    user-select: none;  
+/* ===== 가운데 스크롤 영역 ===== */
+#mainBoard {
+  position: fixed; /* 화면 중앙 영역 */
+  top: 100px; /* 30(statusBar) + 70(pointBar) */
+  bottom: 66px; /* 하단바 높이만큼 */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 393px;
+  background: #f5f5f5;
+  overflow-y: auto;
+  padding-bottom: 16px;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
 }
 #mainBoard::-webkit-scrollbar {
-  display: none; /* 크롬, 사파리, 오페라 */
-}
-/* 기본재료, 선택 재료, 직접 추가한 재료 */
-#mainBoard p{
-    color: rgba(196, 196, 196, 0.70);
-    font-size: 18px;
-    font-weight: 500;
-    line-height: normal;
+  display: none;
 }
 
-
-#basicBox, #extraBox{
-    display: flex;
-    gap:11px;
-    flex-direction: column;
-    padding-top: 16px;
+/* 상단 안내 문구(내용과 함께 스크롤) */
+.mainMent {
+  padding: 12px 24px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  width: 100%;
+  background: #fff;
+}
+.text1 {
+  color: #545454;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+}
+.text2 {
+  color: #000;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 300;
 }
 
-.basicCheckBox, .extraCheckBox{
-    display: flex;
-    flex-direction: column;
-    gap: 11px;
+#mainBoardInner {
+  background: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  padding: 0 35px 16px 35px;
+  user-select: none;
 }
 
-
-.ingredient-btn{
-    display: flex;
-    padding: 15px 33px;
-    align-items: center;
-    gap: 10px;
-    align-self: stretch;
-    border-radius: 20px;
-    border: 1px solid #D9D9D9;
-    background: #FFF;
-    color: #000;
-    font-size: 18px;
-    font-weight: 500;
-    line-height: normal;
-    transition: background-color 0.3s, color 0.3s;
+/* 섹션 타이틀 */
+#mainBoard p {
+  color: rgba(196, 196, 196, 0.8);
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 12px;
 }
 
-/* 선택되었을 때 btn의 색상 변환 */
+/* 리스트 컨테이너 */
+#basicBox,
+#extraBox {
+  display: flex;
+  gap: 11px;
+  flex-direction: column;
+  padding-top: 8px;
+}
+.basicCheckBox,
+.extraCheckBox {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+/* 재료 버튼 */
+.ingredient-btn {
+  display: flex;
+  padding: 15px 18px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 20px;
+  border: 1px solid #d9d9d9;
+  background: #fff;
+  color: #000;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 0.2s, color 0.2s, transform 0.1s;
+}
+.ingredient-btn:active {
+  transform: scale(0.99);
+}
+
+/* 선택 상태 */
 input[type="checkbox"]:checked + .ingredient-btn {
-    background-color: #BEDA78;
-    border: 1px solid #D9D9D9;
-    color: #FFF;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
+  background-color: #beda78;
+  border: 1px solid #d9d9d9;
+  color: #fff;
 }
 
-/* 하단탭 */
-.bottomBoard{
-    position: absolute;
-    bottom: 0;
-    display: flex;
-    height: 66px;
-    width: 100%;
-    padding: 16px 15px;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-shrink: 0;
-    background: #FFF;
-}
-
-.bottomBoard p{
-    color: #545454;
-    text-align: center;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: normal;
-}
-
-.userPick{
-    display: flex;
-    width: 134px;
-    height: 34px;
-    padding: 14px;
-    justify-content: center;
-    align-items: center;
-    gap: 2px;
-    flex-shrink: 0; 
-    border-radius: 15px;
-    background: #D9D9D9;
-}
-
-.nextBtn{
-    display: flex;
-    width: 134px;
-    height: 34px;
-    padding: 14px 0;
-    justify-content: center;
-    align-items: center;
-    gap: 2px;
-    flex-shrink: 0;
-    border-radius: 15px;
-    background: #BEDA78;
-    color: #FFF;
-    text-align: center;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: normal;
-}
-
+/* 빈 상태 문구 */
 .empty-log {
-    color: #888;           /* 글자색 */
-    font-size: 16px;       /* 글자 크기 */
-    text-align: center;    /* 가운데 정렬 */
-    padding: 20px 0;       /* 위아래 여백 */
+  color: #888;
+  font-size: 15px;
+  text-align: center;
+  padding: 18px 0;
+}
+
+/* ===== 하단 고정 바 ===== */
+.bottomBoard {
+  position: fixed; /* 고정 */
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 393px;
+  height: 66px;
+  background: #f5f5f5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* 버튼 수직 가운데 */
+  padding: 0 15px;
+  z-index: 100;
+}
+
+.bottomBoard p {
+  color: #545454;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* 하단 버튼들 */
+.userPick,
+.nextBtn {
+  display: flex;
+  width: 134px;
+  height: 34px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+}
+.userPick {
+  background: #d9d9d9;
+}
+.nextBtn {
+  background: #beda78;
+  color: #fff;
+  font-weight: 600;
+}
+.userPick .btn {
+  all: unset;
+  cursor: pointer;
 }

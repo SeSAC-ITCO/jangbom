@@ -203,7 +203,7 @@ user-select: none;
 
 
 /* 하단 탭 */
-#bottomTab {
+/* #bottomTab {
     position: absolute ;
     bottom: 0;
     left: 0;
@@ -234,24 +234,59 @@ user-select: none;
 }
 
 #bottomTab p {
-    color: #A5A5A5; /* 기본 글자 색상 - 연한 회색 */
+    color: #A5A5A5; 
     text-decoration: none;
     transition: color 0.3s;
 }
 
 #bottomTab a.active p{
-  color: #000000; /* 활성 탭 글자 색상 - 진한 검정 */
+  color: #000000; 
 }
 
 #bottomTab a svg path {
-    stroke: #A5A5A5; /* 기본 아이콘 색상 */
+    stroke: #A5A5A5; 
     transition: stroke 0.3s;
 }
 
 #bottomTab a.active svg path {
-  stroke: #000000; /* 활성 아이콘 색상 */
+    stroke: #000000; 
+} */
+
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    z-index: 300;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    width: 393px;
+    height: 70px;
+    padding: 12px 60px;
+    background: #f5f5f5;
+    border: 1px solid #d9d9d9;
+    box-sizing: border-box;
+    overflow-y: auto;
 }
 
+.bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bottom-nav-item img {
+    width: 24px;
+    height: auto;
+    color: black;
+}
+
+.bottom-nav-item-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #a5a5a5;
+}
 
 
 

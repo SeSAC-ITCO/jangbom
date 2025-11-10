@@ -1,82 +1,143 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/food_leftover_select_recent_ingredients.css' %}" />
-    <script src="{% static 'js/food_leftover_select_recent_ingredients.js' %}" defer></script>
-    <title>Document</title>
-</head>
-<body>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'css/food_leftover_select_recent_ingredients.css' %}"
+    />
+    <script
+      src="{% static 'js/food_leftover_select_recent_ingredients.js' %}"
+      defer
+    ></script>
+    <title>최근 구매한 식재료</title>
+  </head>
+  <body>
     <div id="Container">
-        <img id="statusBar" src="{% static 'img/iPhone Status bar.png' %}"/>
-        <div id="pointBar">
-            <a href="{% url 'food:recipe_input' %}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <path d="M20 24L12 16L20 8" stroke="#D9D9D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </a>
-            <div class="userBar">
-                <a href="{% url 'food:cart_view' %}" class="basket-container">
-                    {% if cart_items_count == 0 %}
-                        <img src="{% static 'img/basket.svg' %}" class="basket" alt="basket">
-                        <span class="basket-count">{{ cart_items_count }}</span>
-                    {% else %}
-                        <img src="{% static 'img/basket.svg' %}" class="basket" alt="basket">
-                        <span class="basket-count">{{ cart_items_count }}</span>
-                    {% endif %}
-                </a>
-                <a href="{% url 'point:barcode' %}"><img src="{% static 'img/lucide.svg' %}" class="lucide" alt="lucide"></a>
-                <a href="{% url 'point:point_home' %}"><div class="pointNum"><p>{{ total_point }}P</p></div></a>
-            </div>
+      <!-- 상단 고정 영역 -->
+      <img
+        id="statusBar"
+        src="{% static 'img/iPhone Status bar.png' %}"
+        alt="status"
+      />
+      <div id="pointBar">
+        <a href="{% url 'food:recipe_input' %}" aria-label="뒤로가기">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 32 32"
+            fill="none"
+          >
+            <path
+              d="M20 24L12 16L20 8"
+              stroke="#D9D9D9"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </a>
+        <div class="userBar">
+          <a
+            href="{% url 'food:cart_view' %}"
+            class="basket-container"
+            aria-label="장바구니"
+          >
+            <img
+              src="{% static 'img/basket.svg' %}"
+              class="basket"
+              alt="basket"
+            />
+            <span class="basket-count">{{ cart_items_count }}</span>
+          </a>
+          <a href="{% url 'point:barcode' %}" aria-label="바코드"
+            ><img
+              src="{% static 'img/lucide.svg' %}"
+              class="lucide"
+              alt="lucide"
+          /></a>
+          <a href="{% url 'point:point_home' %}" aria-label="포인트">
+            <div class="pointNum"><p>{{ total_point }}P</p></div>
+          </a>
         </div>
+      </div>
+
+      <!-- 가운데 스크롤 영역 -->
+      <div id="mainBoard">
         <div class="mainMent">
-                <div class="text1">최근 구매한 식재료 목록</div>
-                <div class="text2">오늘 요리할 남은 식재료를 3개 이내로 선택해주세요<br>
-                    활용 가능한 요리법을 알려드릴게요!
-                </div>
-        </div>
-        <div id="mainBoard">
-            <form method="post" id="ingredientForm">
-                {% csrf_token %}
-
-                <div id="basicBox">
-                    <div class="basicCheckBox">
-                        {% for si in recent_ingredients %}
-                            <input type="checkbox" id="basic_{{ forloop.counter }}" name="ingredient_ids" value="{{ si.ingredient.id }}" 
-                                {% if selected_ids and ing.id|stringformat:"s" in selected_ids %}{% endif %} hidden>
-                            <label for="basic_{{ forloop.counter }}" class="ingredient-btn"> {{ si.ingredient.name }}</label>
-                        {% empty %}
-                            <p class="empty-log">장바구니에 재료가 없습니다</p>
-                        {% endfor %}
-                    </div>
-                </div>
-
-                <div id="extraBox">
-                    <p>직접 추가한 재료</p>
-                    <div class="extraCheckBox">
-                        {% for ing in extra_ingredients %}
-                            <input type="checkbox" id="extra_{{ forloop.counter }}" name="ingredient_ids" value="{{ ing.id }}"  hidden>
-
-                            <label for="extra_{{ forloop.counter }}" class="ingredient-btn"> {{ ing.name }}</label>
-                        {% empty %}
-                            <p class="empty-log">직접 추가한 재료가 없습니다</p>
-                        {% endfor %}
-                    </div>
-                </div>
-
-
-            </form>
+          <div class="text1">최근 구매한 식재료 목록</div>
+          <div class="text2">
+            오늘 요리할 남은 식재료를 3개 이내로 선택해주세요<br />
+            활용 가능한 요리법을 알려드릴게요!
+          </div>
         </div>
 
-        <div class="bottomBoard">
-            <form action="{% url 'food:leftover_extra_ingredient_search' %}" method="get" class="userPick">
-                <button type="submit" class="btn"><p>재료 직접 담기</p></button>
-            </form>
+        <div id="mainBoardInner">
+          <form method="post" id="ingredientForm">
+            {% csrf_token %}
 
-            <button type="submit" form="ingredientForm" class="nextBtn">다음</button>
+            <div id="basicBox">
+              <p>최근 구매한 재료</p>
+              <div class="basicCheckBox">
+                {% for si in recent_ingredients %}
+                <input
+                  type="checkbox"
+                  id="basic_{{ forloop.counter }}"
+                  name="ingredient_ids"
+                  value="{{ si.ingredient.id }}"
+                  hidden
+                />
+                <label for="basic_{{ forloop.counter }}" class="ingredient-btn"
+                  >{{ si.ingredient.name }}</label
+                >
+                {% empty %}
+                <p class="empty-log">장바구니에 재료가 없습니다</p>
+                {% endfor %}
+              </div>
+            </div>
+
+            <div id="extraBox">
+              <p>직접 추가한 재료</p>
+              <div class="extraCheckBox">
+                {% for ing in extra_ingredients %}
+                <input
+                  type="checkbox"
+                  id="extra_{{ forloop.counter }}"
+                  name="ingredient_ids"
+                  value="{{ ing.id }}"
+                  hidden
+                />
+                <label for="extra_{{ forloop.counter }}" class="ingredient-btn"
+                  >{{ ing.name }}</label
+                >
+                {% empty %}
+                <p class="empty-log">직접 추가한 재료가 없습니다</p>
+                {% endfor %}
+              </div>
+            </div>
+          </form>
         </div>
+      </div>
+
+      <!-- 하단 고정 영역 -->
+      <div class="bottomBoard">
+        <form
+          action="{% url 'food:leftover_extra_ingredient_search' %}"
+          method="get"
+          class="userPick"
+        >
+          <button type="submit" class="btn"><p>재료 직접 담기</p></button>
+        </form>
+        <button type="submit" form="ingredientForm" class="nextBtn">
+          다음
+        </button>
+      </div>
     </div>
-</body>
+  </body>
 </html>

@@ -467,3 +467,16 @@ body {
   font-weight: 600;
   color: #a5a5a5;
 }
+
+/* ----- 수정*/
+.empty {
+  margin-top: 16px;
+  padding-left: 16px;
+  color: #d9d9d9;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}

@@ -11,13 +11,52 @@
     caret-color: transparent;
 }
 
-#Container{
+/* 중앙 앱 화면 크기 */
+#Container {
     position: relative;
     width: 393px;
     height: 852px;
     margin: 0 auto;
     border: 1px solid var(--Gray-Primary, #d9d9d9);
+    background: #fff;
+    overflow: hidden; /* 전체 스크롤 방지 */
 }
+
+/* ===== 상단 고정 ===== */
+#statusBar,
+#pointBar, #mainMentFixed{
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 393px;
+    z-index: 100;
+    background: #fff;
+}
+
+#statusBar {
+    top: 0;
+    height: 30px;
+    object-fit: cover;
+}
+
+#pointBar {
+    top: 30px;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+}
+
+/* 상단 내부 */
+.userBar {
+    display: inline-flex;
+    padding: 0 15px;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
 .basket-container {
     position: relative;
     display: inline-block;
@@ -25,10 +64,10 @@
 
 .basket-count {
     position: absolute;
-    bottom: -1px;  /* 아래쪽으로 */
-    right: -6px;   /* 오른쪽으로 */
+    bottom: -1px;
+    right: -6px;
     background: #545454;
-    color: #FFFFFF;
+    color: #fff;
     font-size: 10px;
     font-weight: 300;
     width: 16px;
@@ -38,25 +77,8 @@
     align-items: center;
     justify-content: center;
 }
-/* 상단 바 */
-#pointBar{
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 12px;
-}
 
-.userBar{
-    display: inline-flex;
-    padding: 0 15px;
-    justify-content: center;
-    align-items: center;
-    /* border: 1px solid #ccc; */
-    gap: 5px;
-}
-
-.pointNum{
+.pointNum {
     display: inline-block;
     justify-content: center;
     align-items: center;
@@ -64,7 +86,7 @@
     border-radius: 20px;
     background: #F5F5F5;
     padding: 5px 17px;
-    max-width: 120px;    
+    max-width: 120px;
 }
 
 .pointNum p {
@@ -72,162 +94,149 @@
     text-align: center;
     font-size: 14px;
     font-weight: 600;
-    line-height: normal;
     white-space: nowrap;
-    max-width: 120px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.mainMent{
-    padding: 12px 61px;
-    padding-top: 0;
-    gap: 8px;
+/* ===== 가운데 스크롤 영역 ===== */
+#mainBoard {
+    position: fixed;
+    top: 190px; /* mainMent까지 포함한 높이 */
+    bottom: 66px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 393px;
+    background: #F5F5F5;
+    padding: 0 35px 16px 35px;
+    overflow-y: auto;
+    scrollbar-width: none;
 }
-.text1{
+
+#mainBoard::-webkit-scrollbar {
+    display: none;
+}
+
+/* ===== 제목 영역 ===== */
+#mainMentFixed {
+    top: 100px; /* statusBar(30) + pointBar(70) */
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-bottom: 1px solid #eee;
+}
+
+.mainMent {
+    text-align: center;
+    padding: 8px 20px;
+}
+.text1 {
     color: #545454;
     text-align: center;
     font-size: 24px;
     font-weight: 700;
-    line-height: normal;
 }
-.text2{
+
+.text2 {
     color: #000;
     text-align: center;
     font-size: 16px;
     font-weight: 300;
-    line-height: normal;
     white-space: nowrap;
 }
 
-
-/* 메인 보드 */
-#mainBoard{
-    background: #F5F5F5;
-    display: flex;
-    flex-direction: column;
-    padding: 0 35px 16px 35px;         /* Container 내에서 남는 공간을 채우도록 */
-    position: absolute;
-    bottom: 66px;
-    left: 0;
-    right: 0;
-    top: 195px;
-    overflow-y: auto;
-
-    scrollbar-width: none;       /* Firefox */
-    -ms-overflow-style: none; 
-    user-select: none;  
-}
-#mainBoard::-webkit-scrollbar {
-  display: none; /* 크롬, 사파리, 오페라 */
-}
-/* 기본재료, 선택 재료, 직접 추가한 재료 */
-#mainBoard p{
-    color: rgba(196, 196, 196, 0.70);
+/* ===== 재료 영역 ===== */
+#mainBoard p {
+    color: rgba(196, 196, 196, 0.7);
     font-size: 20px;
     font-weight: 500;
-    line-height: normal;
 }
 
-
-#basicBox, #optionalBox, #extraBox{
+#basicBox, #optionalBox, #extraBox {
     display: flex;
-    gap:11px;
     flex-direction: column;
+    gap: 11px;
     padding-top: 16px;
 }
 
-.basicCheckBox, .optionalCheckBox, .extraCheckBox{
+.basicCheckBox, .optionalCheckBox, .extraCheckBox {
     display: flex;
     flex-direction: column;
     gap: 11px;
 }
 
-
-.ingredient-btn{
+.ingredient-btn {
     display: flex;
     padding: 15px 33px;
     align-items: center;
     gap: 10px;
-    align-self: stretch;
     border-radius: 20px;
     border: 1px solid #D9D9D9;
     background: #FFF;
     color: #000;
     font-size: 18px;
     font-weight: 500;
-    line-height: normal;
     transition: background-color 0.3s, color 0.3s;
 }
 
-/* 선택되었을 때 btn의 색상 변환 */
 input[type="checkbox"]:checked + .ingredient-btn {
     background-color: #BEDA78;
     border: 1px solid #D9D9D9;
     color: #FFF;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
 }
 
-/* 하단탭 */
-.bottomBoard{
-    position: absolute;
+/* ===== 하단 고정 ===== */
+.bottomBoard {
+    position: fixed;         /* absolute → fixed */
     bottom: 0;
-    display: flex;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 393px;
     height: 66px;
-    width: 100%;
-    padding: 16px 15px;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-shrink: 0;
     background: #FFF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 15px;
+    z-index: 100;
+    box-shadow: 0 -1px 5px rgba(0,0,0,0.05);
 }
 
-.bottomBoard p{
+.bottomBtn {
+    display: flex;
+    flex-direction: row;
+    gap: 92px;
+    align-items: center;
+}
+
+.bottomBoard p {
     color: #545454;
     text-align: center;
     font-size: 16px;
     font-weight: 500;
-    line-height: normal;
 }
 
-.bottomBtn{
-    display: flex;
-    flex-direction: row;
-    gap:92px;
-    align-items: center;
-}
-
-
-.userPick{
+.userPick {
     display: flex;
     width: 134px;
     height: 34px;
-    padding: 14px;
     justify-content: center;
     align-items: center;
-    gap: 2px;
-    flex-shrink: 0; 
     border-radius: 15px;
     background: #D9D9D9;
 }
 
-.nextBtn{
+.nextBtn {
     display: flex;
     width: 134px;
     height: 34px;
-    padding: 14px 0;
     justify-content: center;
     align-items: center;
-    gap: 2px;
-    flex-shrink: 0;
     border-radius: 15px;
     background: #BEDA78;
     color: #FFF;
-    text-align: center;
     font-size: 16px;
     font-weight: 500;
-    line-height: normal;
 }

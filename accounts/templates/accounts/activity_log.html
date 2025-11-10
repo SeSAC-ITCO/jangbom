@@ -40,13 +40,21 @@
           </a>
           <div class="top-point">
             <a href="{% url 'food:cart_view' %}" class="basket-container">
-                {% if cart_items_count == 0 %}
-                    <img src="{% static 'img/basket.svg' %}" class="basket" alt="basket">
-                    <span class="basket-count">{{ cart_items_count }}</span>
-                {% else %}
-                    <img src="{% static 'img/basket.svg' %}" class="basket" alt="basket">
-                    <span class="basket-count">{{ cart_items_count }}</span>
-                {% endif %}
+              {% if cart_items_count == 0 %}
+              <img
+                src="{% static 'img/basket.svg' %}"
+                class="basket"
+                alt="basket"
+              />
+              <span class="basket-count">{{ cart_items_count }}</span>
+              {% else %}
+              <img
+                src="{% static 'img/basket.svg' %}"
+                class="basket"
+                alt="basket"
+              />
+              <span class="basket-count">{{ cart_items_count }}</span>
+              {% endif %}
             </a>
             <a
               href="{% url 'point:barcode' %}"
@@ -112,7 +120,21 @@
             >
               <div class="more-function-item2">
                 <span class="function-name">요리법 보관함</span>
-                <img src="{% static 'img/chevron-right.svg' %}" alt="" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <path
+                    d="M9 18L15 12L9 6"
+                    stroke="#545454"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
               </div>
             </a>
 
@@ -122,7 +144,21 @@
             >
               <div class="more-function-item2">
                 <span class="function-name">세부 활동 내역</span>
-                <img src="{% static 'img/chevron-right.svg' %}" alt="" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <path
+                    d="M9 18L15 12L9 6"
+                    stroke="#545454"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
               </div>
             </a>
           </div>
@@ -162,7 +198,9 @@
                 stroke-linejoin="round"
               />
             </svg>
-            <span class="bottom-nav-item-title" style="color:black">내 활동</span>
+            <span class="bottom-nav-item-title" style="color: black"
+              >내 활동</span
+            >
           </a>
           <a class="bottom-nav-item" href="{% url 'point:point_home' %}">
             <svg

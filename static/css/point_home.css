@@ -1,317 +1,307 @@
 * {
-    font-family: 'Pretendard';
-    font-style: normal;
-    margin: 0;
-    padding: 0;
-    border: none;
-    outline: none;
-    box-sizing: border-box;
-    text-decoration: none;
-    cursor: default;
-    caret-color: transparent;
+  font-family: "Pretendard";
+  font-style: normal;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  text-decoration: none;
+  cursor: default;
+  caret-color: transparent;
 }
 @font-face {
-    font-family: 'HSSanTokki20-Regular';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405@1.0/HSSanTokki20-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "HSSanTokki20-Regular";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2405@1.0/HSSanTokki20-Regular.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
 }
 .basket-container {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
 .basket-count {
-    position: absolute;
-    bottom: -1px;  /* 아래쪽으로 */
-    right: -6px;   /* 오른쪽으로 */
-    background: #545454;
-    color: #FFFFFF;
-    font-size: 10px;
-    font-weight: 300;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: absolute;
+  bottom: -1px; /* 아래쪽으로 */
+  right: -6px; /* 오른쪽으로 */
+  background: #545454;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 300;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-#Container{
-    position: relative;
-    width: 393px;
-    height: 852px;
-    margin: 0 auto;
-    border: 1px solid var(--Gray-Primary, #d9d9d9);
+#Container {
+  position: relative;
+  width: 393px;
+  height: 852px;
+  margin: 0 auto;
+  border: 1px solid var(--Gray-Primary, #d9d9d9);
 }
 
 /* 상단 바 */
-#pointBar{
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 12px;
+#pointBar {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
 }
 
-.homeBtn{
-    display: flex;
-    align-items: center;
+.homeBtn {
+  display: flex;
+  align-items: center;
 }
 
-.homeBtn p{
-    color: #D9D9D9;
-    text-align: center;
-    font-size: 18px;
-    font-weight: 500;
-    line-height: normal;
+.homeBtn p {
+  color: #d9d9d9;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: normal;
 }
 
-
-.userBar{
-    display: inline-flex;
-    padding: 0 15px;
-    justify-content: center;
-    align-items: center;
-    /* border: 1px solid #ccc; */
-    gap: 5px;
+.userBar {
+  display: inline-flex;
+  padding: 0 15px;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid #ccc; */
+  gap: 5px;
 }
 
-.pointNum{
-    display: inline-block;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border-radius: 20px;
-    background: #F5F5F5;
-    padding: 5px 17px;
-    max-width: 120px;    
+.pointNum {
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 20px;
+  background: #f5f5f5;
+  padding: 5px 17px;
+  max-width: 120px;
 }
 
 .pointNum p {
-    color: #545454;
-    text-align: center;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: normal;
-    white-space: nowrap;
-    max-width: 120px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  color: #545454;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: normal;
+  white-space: nowrap;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* 메인 보드 */
 
 #mainBoard * {
-user-select: none;
+  user-select: none;
 }
 
 /* 메인-1 */
 
-.board1{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding: 12px 78px;
-    gap: 10px;
+.board1 {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 12px 78px;
+  gap: 10px;
 }
 
 /* 멘트부분 */
-.userPoint{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    gap: 7px;
+.userPoint {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
 }
-.text1{
-    color: #545454;
-    text-align: center;
-    font-family: "HSSanTokki20-Regular";
-    font-size: 24px;
-    font-weight: 400;
-    line-height: normal;
+.text1 {
+  color: #545454;
+  text-align: center;
+  font-family: "HSSanTokki20-Regular";
+  font-size: 24px;
+  font-weight: 400;
+  line-height: normal;
 }
-.text2{
-    color: #545454;
-    text-align: center;
-    font-size: 15px;
-    font-weight: 500;
-    line-height: normal;
+.text2 {
+  color: #545454;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: normal;
 }
-
 
 /* 포인트 원 */
 .pointCircle {
-    width: 103px;
-    height: 103px;
-    gap: 8px;
-    background-color: #BEDA78;
-    border-radius: 50%; /* 원형 */
-    display: flex;
-    align-items: center; /* 세로 중앙정렬 */
-    justify-content: center; /* 가로 중앙정렬 */
+  width: 103px;
+  height: 103px;
+  gap: 8px;
+  background-color: #beda78;
+  border-radius: 50%; /* 원형 */
+  display: flex;
+  align-items: center; /* 세로 중앙정렬 */
+  justify-content: center; /* 가로 중앙정렬 */
 }
 
 .point_num {
-    color: #FFF;
-    text-align: center;
-    font-size: 24px;
-    font-weight: 500;
-    line-height: normal;
+  color: #fff;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: normal;
 }
 
 /* 닉네임&랭킹 */
 .user_info {
-    display: flex;
-    max-width: 250px;
-    flex-direction: column;
-    gap: 4px; 
-    white-space: nowrap;
+  display: flex;
+  max-width: 250px;
+  flex-direction: column;
+  gap: 4px;
+  white-space: nowrap;
 }
 
 .user_info_top {
-    display: flex;
-    align-items: center;
-    gap: 6px; 
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .nickname {
-    color: #000;
-    text-align: center;
-    font-size: 15px;
-    font-weight: 600;
-    line-height: normal;
+  color: #000;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: normal;
 }
 
 .user_lank {
-    display: flex;
-    padding: 4px 14px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border-radius: 25px;
-    background: #F5F5F5;
+  display: flex;
+  padding: 4px 14px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 25px;
+  background: #f5f5f5;
 }
 
 .user_lank p {
-    color: #545454;
-    text-align: center;
-    font-size: 15px;
-    font-weight: 500;
-    line-height: normal;
+  color: #545454;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: normal;
 }
 
 .user_address {
-    color: #A5A5A5;
-    font-size: 15px;
-    font-weight: 400;
-    line-height: normal;
+  color: #a5a5a5;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: normal;
 }
 
 /* 장 보러 가기 버튼 */
-.food_buy{
-    display: flex;
-    padding: 5px 80px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border-radius: 15px;
-    background: #F5F5F5;
-    margin-top: 11px;
+.food_buy {
+  display: flex;
+  padding: 5px 80px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 15px;
+  background: #f5f5f5;
+  margin-top: 11px;
 
-    color: #545454;
-    text-align: center;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: normal;
-    white-space: nowrap;
+  color: #545454;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+  white-space: nowrap;
 }
-
 
 /* 메인-2 */
-.board2{
-    position: absolute;
-    top: 410px;
-    bottom:65px;
-    width: 100%;
-    background: #F5F5F5;
-    padding: 36px 24px 0 24px;
+.board2 {
+  position: absolute;
+  top: 410px;
+  bottom: 65px;
+  width: 100%;
+  background: #f5f5f5;
+  padding: 36px 24px 0 24px;
 }
 
-.point_history{
-    display: flex;
-    width: 345px;
-    padding: 11px 16px;
-    justify-content:space-between;
-    align-items: center;
-    border-radius: 20px;
-    background: #FFF;
+.point_history {
+  display: flex;
+  width: 345px;
+  padding: 11px 16px;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 20px;
+  background: #fff;
 
-    color: #545454;
+  color: #545454;
 
-    font-size: 18px;
-    font-weight: 500;
-    line-height: normal;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: normal;
 }
 
-.point_ranking{
-        display: flex;
-    width: 345px;
-    padding: 11px 16px;
-    justify-content:space-between;
-    align-items: center;
-    border-radius: 20px;
-    background: #FFF;
-    margin-top: 10px;
+.point_ranking {
+  display: flex;
+  width: 345px;
+  padding: 11px 16px;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 20px;
+  background: #fff;
+  margin-top: 10px;
 
-    color: #545454;
+  color: #545454;
 
-    font-size: 18px;
-    font-weight: 500;
-    line-height: normal;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: normal;
 }
-
-
-
-
-
-
 
 /* 하단 탭 */
-#bottomTab {
-    position: absolute ;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 65px;
-    padding: 12px 60px;
-    border-top: 1px solid #EBE9E9;
-    background: #F5F5F5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    gap: 68px;
-}
-#bottomTab p{
-    text-align: center;
-    font-size: 12px;
-    font-weight: 600;
-    line-height: normal;
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  z-index: 300;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  width: 393px;
+  height: 70px;
+  padding: 12px 60px;
+  background: #f5f5f5;
+  border-top: 1px solid #d9d9d9;
+  box-sizing: border-box;
+  overflow-y: auto;
 }
 
-.homeTab, .myTab, .pointTab{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 4px;
-}
-.myTab p, .homeTab p {
-    color: #A5A5A5; /* 기본 글자 색상 - 연한 회색 */
-}
-.pointTab p {
-    color: #000;
+.bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+.bottom-nav-item img {
+  width: 24px;
+  height: auto;
+  color: black;
+}
 
-
+.bottom-nav-item-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #a5a5a5;
+}
