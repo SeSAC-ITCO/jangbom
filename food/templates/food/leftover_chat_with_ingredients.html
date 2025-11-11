@@ -42,11 +42,11 @@
                 <div class="chatBoard">
                     {% if m.role == "user" %}
                         <div class="userMsg">
-                            <p>{{ m.content }}</p>
+                            <p>{{ m.conten|linebreaksbr }}</p>
                         </div>
                     {% else %}
                         <div class="gptMsg">
-                            <p>{{ m.content }}</p>
+                            <p>{{ m.content|linebreaksbr }}</p>
                         </div>
                     {% endif %}
                 </div>

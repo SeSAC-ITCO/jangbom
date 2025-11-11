@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const renderBoxes = (val) => {
     const digits = (val || "").replace(/\D/g, "").slice(0, 4);
     boxes.forEach((b, i) => {
-      b.textContent = digits[i] ?? "";
+      b.textContent = digits[i] ? "●" : "";
       b.classList.toggle("has-value", !!digits[i]);
       b.classList.toggle("next", i === digits.length && digits.length < boxes.length);
       b.classList.remove("error");

@@ -42,11 +42,11 @@
                 {% for msg in chat_history  %}
                     {% if msg.role == 'user' %}
                         <div class="userMsg">
-                            <p>{{ msg.content }}</p>
+                            <p>{{ msg.content|linebreaksbr }}</p>
                         </div>
                     {% elif msg.role == 'assistant' %}
                         <div class="gptMsg">
-                            <p>{{ msg.content }}</p>
+                            <p>{{ msg.content|linebreaksbr }}</p>
                         </div>
                     {% endif %}
                 {% endfor %}

@@ -31,9 +31,9 @@
           </a>
 
           <div class="top-point">
-            <a class="top-cart" href="{% url 'food:cart_view' %}" aria-label="장바구니">
+            <!-- <a class="top-cart" href="{% url 'food:cart_view' %}" aria-label="장바구니">
               🧺{% if cart_items_count %}<span class="cart-count">{{ cart_items_count }}</span>{% endif %}
-            </a>
+            </a> -->
             <img class="point" src="{% static 'img/lucide.svg' %}" alt="point" />
             <p class="mypoint">{{ total_point }} P</p>
           </div>

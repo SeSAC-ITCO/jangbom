@@ -531,3 +531,30 @@ body {
   width: 100%;
   border-top: 1px solid #eee;
 }
+
+.top-cart {
+  position: relative;
+  display: inline-block;
+}
+.top-cart svg,
+.top-cart img {
+  display: block;
+}
+
+.cart-count {
+  position: absolute;
+  bottom: -2px;   
+  right: -6px;    
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #545454;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
