@@ -1,6 +1,8 @@
 # 🛒 장봄
 한 끼 식사의 여정을 모두 책임지는 동네 장보기 플랫폼
-![인트로](./static/img/readme_intro.png)
+<img width="306" height="212" alt="jangbomlogo" src="https://github.com/user-attachments/assets/4e7d39da-33aa-41c2-8638-d352ac612c46" />
+![인트로](./static/img/jangbom_intro.png)
+
 ---
 
 ## 💖 서비스 슬로건
