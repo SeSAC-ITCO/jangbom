@@ -1,6 +1,4 @@
-<p align="center">
   # 장봄
-</p>
 ![인트로](./static/img/readme_intro.png)
 
 ---
