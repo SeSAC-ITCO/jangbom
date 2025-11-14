@@ -4,7 +4,7 @@
 "한 끼 식사의 여정을 모두 책임지는 동네 장보기 플랫폼"
 </div>
 
-  ![INTRO](./static/img/readme_intro.png)
+  ![INTRO](./static/img/readme_info.png)
 
 ---
 
