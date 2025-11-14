@@ -11,7 +11,7 @@
 - 🛍️ 지역 상권 연계 : 지역 마트 재고와 연동해 재료를 매칭하고, 구매 인증을 통해 지역경제를 활성화합니다.
 - 🌱 지속가능한 소비 : 걸음 수를 칼로리로 환산하고, 포장재 낭비를 줄이는 친환경 소비로 이어집니다.
 
-장봄은 건강, 환경, 지역경제를 하나로 잇는 플랫폼으로,
+<img src="./static/img/title.png" width="26"/>은 건강, 환경, 지역경제를 하나로 잇는 플랫폼으로,
 “한 끼 식사의 여정을 함께하는 새로운 로컬 소비 경험”을 제시합니다.
 
 🔗 Figma Prototype : [바로가기](https://www.figma.com/design/LnB8hldRe6h1hwKahSDUKE/%EC%9E%A5%EB%B4%84-jangbom--%EB%94%94%EC%9E%90%EC%9D%B8?node-id=0-1&t=CoOvtU9VsMDVAGWD-1)
