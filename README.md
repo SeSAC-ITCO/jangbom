@@ -35,9 +35,10 @@
 
 ---
 ## 👩‍💻 팀원 소개
-|손지수|양서윤|한연주|양현빈|이유정|
-|:------:|:------:|:------:|:------:|:------:|
-|기획 · 디자인|프론트엔드|프론트엔드|백엔드|백엔드|
+
+|  기획·디자인  |  프론트엔드  |  프론트엔드  |      백엔드      |      백엔드      |
+|:-------------:|:------------:|:------------:|:----------:|:----------:|
+|    손지수     |    양서윤    |    한연주    |      양현빈      |      이유정      |
 ---
 
 ## 💻 기술 스택
@@ -89,12 +90,12 @@ jangbom/
 
 ---
 ## 🚀 실행 방법
-### 1) 저장소 클론
+### 1. 저장소 클론
 ```bash
 git clone https://github.com/SeSAC-ITCO/jangbom.git
 cd jangbom-main
 ```
-### 2) 가상환경 생성 및 활성화
+### 2. 가상환경 생성 및 활성화
 ```bash
 python -m venv venv
 
@@ -104,21 +105,21 @@ venv\Scripts\activate
 # macOS / Linux
 source venv/bin/activate
 ```
-### 3) 패키지 설치
+### 3. 패키지 설치
 ```bash
 pip install -r requirements.txt
 ```
-### 4) 환경 변수 파일 생성 (.env)
+### 4. 환경 변수 파일 생성 (.env)
 프로젝트 루트 경로에 `.env` 파일을 생성한 뒤 아래 형식으로 입력합니다. (`OPENAI_API_KEY`, `KAKAO_API_KEY` 값은 직접 발급받아 채워야 합니다.)
-```
+```bash
 OPENAI_API_KEY=your_openai_api_key_here
 KAKAO_API_KEY=your_kakao_api_key_here
 ```
-### 5) 데이터베이스 초기화
+### 5. 데이터베이스 초기화
 ```bash
 python manage.py migrate
 ```
-### 6) 서버 실행
+### 6. 서버 실행
 ```bash
 python manage.py runserver
 ```
