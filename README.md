@@ -11,10 +11,10 @@
 ## 🎤 서비스 소개
 장봄은 **‘귀찮음’을 ‘가치’로 바꾸는 걷기 기반 로컬 장보기 서비스**입니다.<br>대형 플랫폼 중심 유통 구조 속에서 경쟁력을 잃어가는 동네 마트와 전통시장에 새로운 활력을 불어넣습니다.
 
-&emsp;🥬 걷기 기반 소비 경험 : 사용자가 직접 걸어가 장을 보면, 이동 시간만큼 포인트가 적립됩니다.
-<br>&emsp;🤖 AI와 함께하는 한 끼 여정 : 요리명 입력만으로 필요한 재료를 자동 분류하고, 남은 재료 활용법까지 추천합니다.
-<br>&emsp;🛍️ 지역 상권 연계 : 지역 마트 재고와 연동해 재료를 매칭하고, 구매 인증을 통해 지역경제를 활성화합니다.
-<br>&emsp;🌱 지속가능한 소비 : 걸음 수를 칼로리로 환산하고, 포장재 낭비를 줄이는 친환경 소비로 이어집니다.
+- 🥬 걷기 기반 소비 경험 : 사용자가 직접 걸어가 장을 보면, 이동 시간만큼 포인트가 적립됩니다.
+- 🤖 AI와 함께하는 한 끼 여정 : 요리명 입력만으로 필요한 재료를 자동 분류하고, 남은 재료 활용법까지 추천합니다.
+- 🛍️ 지역 상권 연계 : 지역 마트 재고와 연동해 재료를 매칭하고, 구매 인증을 통해 지역경제를 활성화합니다.
+- 🌱 지속가능한 소비 : 걸음 수를 칼로리로 환산하고, 포장재 낭비를 줄이는 친환경 소비로 이어집니다.
 
 장봄은 건강, 환경, 지역경제를 하나로 잇는 플랫폼으로,
 “한 끼 식사의 여정을 함께하는 새로운 로컬 소비 경험”을 제시합니다.
@@ -23,46 +23,25 @@
 
 ## 🤖 장봄의 AI 기능 상세
 ### 1. AI 기반 요리·식재료 추천 및 활용
-
-✔ 요리명 기반 식재료 추천
-
-- 사용자가 입력한 요리명을 분석해 필수 재료 / 선택 재료 자동 구분
-- 직접 검색할 필요 없이 우선순위가 명확한 장보기 리스트 자동 생성
-- 지역 마트에서 구할 수 있는 재료 중심으로 최적화
-
-✔ 상황 맞춤 요리 추천
-
-- 메뉴를 정하지 못했을 때, AI가 대화형으로 요리 추천
-- 시간, 인원, 분위기 등 조건에 맞는 맞춤형 제안
-- 선택한 요리는 바로 ‘재료 담기’로 연결되어 장보기 플로우와 연동
-
-✔ 과거 구매 이력 기반 요리법 추천
-
-- 사용자의 구매 이력 + 남은 재료 조합을 분석해 새로운 요리법 제안
-- 입력 없이도 자동으로 ‘요리법 보관함’에 저장
-- 식재료 낭비 감소에 기여
-
-✔ 선택 재료 활용법 제공
-
-- 장바구니에서 특정 재료 클릭 → 응용 요리, 활용 아이디어 제시
-- 챗봇 형식으로 추가 조리법 확인 가능
-- 재료 선택 → 활용법 확인으로 자연스럽게 연결되는 흐름
+- 요리명 입력만으로 필수 재료 / 선택 재료 자동 분류
+- 지역 마트에서 구할 수 있는 재료를 기반으로 장보기 리스트 자동 생성
+- 메뉴를 정하지 못한 경우, 조건(시간·인원 등)에 맞춘 AI 메뉴 추천
+- 과거 구매 이력을 활용해 남은 재료 기반 요리법 자동 제안
+- 장바구니 재료 클릭 시 활용법·응용 요리 아이디어 즉시 제공
 
 ### 2. AI 기반 장보기 경험 향상
-✔ 식재료 구매 팁 제공
+- 마트 도착 시 재료 신선도·보관법·구매 팁 자동 안내
+- 직접 걸어온 사용자에게 상황 맞춤 격려 메시지로 동기 부여
 
-- 마트 도착 시, 해당 재료의 신선도 확인법 / 보관법 / 구매 요령 실시간 안내
-- 검색 없이 바로 확인 가능 → 빠른 의사결정 지원
-
-✔ 맞춤형 격려 메시지 제공
-
-- 사용자가 직접 마트까지 걸어왔을 때, 상황 맞춤 메시지를 출력하여 동기 부여
-
-
+---
+## 👩‍💻 팀원 소개
+|손지수|양서윤|한연주|양현빈|이유정|
+|:------:|:------:|:------:|:------:|:------:|
+|기획 · 디자인|프론트엔드|프론트엔드|백엔드|백엔드|
 ---
 
 ## 💻 기술 스택
-<span>프론트엔드: </span> 
+<span> 프론트엔드: </span> 
 <img src="https://img.shields.io/badge/html-E34F26?style=for-the-badge&logo=html5&logoColor=white"> 
 <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> 
 <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
@@ -82,88 +61,67 @@
 
 ---
 
-## 👩‍💻 팀원 소개
-|손지수|양서윤|한연주|양현빈|이유정|
-|:------:|:------:|:------:|:------:|:------:|
-|기획 · 디자인|프론트엔드|프론트엔드|백엔드|백엔드|
-
----
-
 ## 📁 폴더 구조
 ```
-.github/
-├── workflows/
-    └── deploy.yml
-accounts/
-├── __pycache__/
-├── migrations/
-├── templates/
-│   └── accounts/
-├── __init__.py
-├── admin.py
-├── apps.py
-├── forms.py
-├── models.py
-├── tests.py
-├── urls.py
-├── utils.py
-└── views.py
-food/
-├── __pycache__/
-├── migrations/
-├── templates/
-│   └── food/
-├── __init__.py
-├── admin.py
-├── apps.py
-├── models.py
-├── tests.py
-├── urls.py
-├── utils.py
-└── views.py
 jangbom/
-├── __pycache__/
-├── __init__.py
-├── asgi.py
-├── settings.py
-├── urls.py
-└── wsgi.py
-market/
-├── __pycache__/
-├── integrations/
-├── migrations/
-├── services/
-├── templates/
-│   └── market/
-├── __init__.py
-├── admin.py
-├── apps.py
-├── models.py
-├── tests.py
-├── urls.py
-├── utils.py
-└── views.py
-point/
-├── __pycache__/
-├── migrations/
-├── templates/
-│   └── point/
-├── __init__.py
-├── admin.py
-├── apps.py
-├── models.py
-├── tests.py
-├── urls.py
-├── utils.py
-└── views.py
-static/
-├── css/
-├── img/
-└── js/
-manage.py  
-README.md  
-requirements.txt  
-
+├── accounts/        # 회원가입/로그인, 유저 정보
+├── food/            # 재료 선택/AI 요리 추천
+├── market/          # 마트 매칭, 구매 인증
+├── point/           # 포인트 적립 및 관리
+├── static/          # 정적 파일(css/js/img)
+├── jangbom/         # 프로젝트 설정 (settings, urls)
+└── manage.py
 ```
+---
+## ✨ MVP 기능 범위
+### 🪄 구현된 MVP 기능
+- [x] 요리명 입력 시 AI 기반 레시피 · 식재료 추천
+- [x] 필수 재료 / 선택 재료 자동 구분 및 장보기 리스트 생성
+- [x] 선택 재료별 활용법 · 응용 요리 아이디어 제공 (AI 응답 기반)
+- [x] 지역 마트/시장 매칭 및 장보기 여정 화면
+- [x] 마트 도착 · 구매 인증 플로우
+- [x] 걸어서 방문 시 포인트 적립 로직
+
+ ### 🚧 진행 중 기능 
+- [ ] 랭킹 조회
+- [ ] 주소 설정 기능
+- [ ] 세부 활동 내역 · 요리법 보관함
 
 ---
+## 🚀 실행 방법
+### 1) 저장소 클론
+```bash
+git clone https://github.com/SeSAC-ITCO/jangbom.git
+cd jangbom-main
+```
+### 2) 가상환경 생성 및 활성화
+```bash
+python -m venv venv
+
+# Windows
+venv\Scripts\activate
+
+# macOS / Linux
+source venv/bin/activate
+```
+### 3) 패키지 설치
+```bash
+pip install -r requirements.txt
+```
+### 4) 환경 변수 파일 생성 (.env)
+프로젝트 루트 경로에 `.env` 파일을 생성한 뒤 아래 형식으로 입력합니다. (`OPENAI_API_KEY`, `KAKAO_API_KEY` 값은 직접 발급받아 채워야 합니다.)
+```
+OPENAI_API_KEY=your_openai_api_key_here
+KAKAO_API_KEY=your_kakao_api_key_here
+```
+### 5) 데이터베이스 초기화
+```bash
+python manage.py migrate
+```
+### 6) 서버 실행
+```bash
+python manage.py runserver
+```
+#### ⚠️ 참고사항
+- DB 파일(db.sqlite3)은 GitHub에 포함되지 않지만, migrate 명령어로 자동 생성됩니다.
+- API KEY가 없으면 AI 기능 및 지도 기반 기능은 동작하지 않습니다.
