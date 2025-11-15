@@ -616,11 +616,11 @@ def generate_recipe_chat(ingredient_name: str, followup: str | None = None, hist
             "1. 요리명\n"
             "• 핵심 조리 포인트 1줄\n"
             "• 맛/식감/상황 설명 1줄\n"
-            "팁: 있으면 1줄(없으면 생략)\n\n"
+            "TIP : 있으면 1줄\n\n"
             "2. 요리명\n"
             "• 핵심 조리 포인트 1줄\n"
             "• 맛/식감/상황 설명 1줄\n"
-            "팁: 있으면 1줄(없으면 생략)\n\n"
+            "TIP : 있으면 1줄\n\n"
             "- 불릿은 '•'만 사용, 각 블록 사이 빈 줄 1줄"
             f"- 모든 요리에 '{ingredient}'를 실제로 사용하는 지점을 명시"
             + extra_hint

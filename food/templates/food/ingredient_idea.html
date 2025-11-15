@@ -31,7 +31,7 @@
         <div id="gptBox">
             <form method="post" class="inputBar" id="ask-form" action="">
                 {% csrf_token %}
-                <input type="text" name="q" placeholder="요리명을 입력해주세요" class="gptInput" id="ask-input">
+                <input type="text" name="q" placeholder="궁금한 정보가 더 있으신가요?" class="gptInput" id="ask-input">
                 <button type="submit" class="rightArrow">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M12 5L19 12M19 12L12 19M19 12H5" stroke="#ACCE58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -63,11 +63,10 @@
     function append(role, text) {
         const div = document.createElement('div');
         div.className = role === 'user' ? 'userMsg' : 'gptMsg';
-        const p = document.createElement('p');
-        p.textContent = text;
-        div.appendChild(p);
+        const formatted = text.replace(/\n/g, '<br>');
+        div.innerHTML = `<p>${formatted}</p>`;
         chatWrap.appendChild(div);
-        chatWrap.scrollTop = chatWrap.scrollHeight; // 스크롤 아래로 이동
+        chatWrap.scrollTop = chatWrap.scrollHeight;
     }
 
     // ---------------------------
